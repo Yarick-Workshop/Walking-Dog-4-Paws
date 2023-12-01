@@ -34,6 +34,7 @@ wheelRealDiameter = 212;
 sideRealLength = 559.026;
 sideRealHeight = 329.776;
 delta = 0.01;
+wheelPlaceDiameter = 235;
 
 sideMountingHoleCoords = [[165, 35], [-48.3, -25], [-215, 80], [-230, 15]];
 
@@ -74,19 +75,26 @@ module dog_medium()
 {
     if (showMedium)
     {
-        
         color(mediumColor, 1.0)
-        translate([0, 0, sideWidth + mediumWidth * 0.5])
-        difference()
-        {
-            linear_extrude(height = mediumWidth, convexity=2, center = true)
-                import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
-            for(coord = sideMountingHoleCoords)
+        translate([0, 0, sideWidth + mediumWidth * 0.5])       
+            difference()
             {
-                translate([coord[0], coord[1], 0])
-                    screw_hole(mediumWidth);
-            };
-        }
+                linear_extrude(height = mediumWidth, convexity=2, center = true)
+                    import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
+                union()
+                {
+                    for(coord = sideMountingHoleCoords)
+                    {
+                        translate([coord[0], coord[1], 0])
+                            screw_hole(mediumWidth);
+                    }
+                    for (wheelCoord = wheelCoords)
+                    {
+                        translate([wheelCoord[0], wheelCoord[1], 0])
+                                cylinder(h = mediumWidth + delta, d = wheelPlaceDiameter, center=true, $fn = 360);
+                    }
+                }
+            }
     }
 }
 
