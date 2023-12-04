@@ -14,6 +14,8 @@ showDebugFigures = false;
 showWheels = true;
 wheelWidth = 21;
 wheelShaftDiameter = 5;
+wheelSpacerDiameter = 35;
+wheelSpacerOffset = 0.6;
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Sides] */
@@ -33,7 +35,7 @@ sideShift = 15.01;
 wheelRealDiameter = 212;
 sideRealLength = 559.026;
 sideRealHeight = 329.776;
-delta = 0.01;
+delta = 0.05;
 wheelPlaceDiameter = 235;
 
 sideMountingHoleCoords = [[165, 35], [-48.3, -25], [-215, 80], [-230, 15]];
@@ -42,6 +44,7 @@ wheelCoords = [[-159.7, -115.33], [64.25, -111.8]];
 
 // calculations
 scaleFactor = expectedLength / sideRealLength;
+wheelSpacerHeight = (mediumWidth - wheelWidth - 2 * wheelSpacerOffset / scaleFactor) * 0.5;
 
 // debug information
 echo();
@@ -61,6 +64,9 @@ rotate([0, 0, 360 * $t])
 translate([0, -1000, 0])
 rotate([90,0,0])//s
 scale([scaleFactor, scaleFactor, scaleFactor])
+dog_assembled();
+
+module dog_assembled()
 {
     dog_left_side();
     
@@ -158,23 +164,47 @@ module dog_wheels()
     for (wheelCoord = wheelCoords)
     {
         translate([wheelCoord[0], wheelCoord[1], sideWidth + mediumWidth * 0.5])
-            dog_wheel();
+            dog_wheel_assembled();
     }
+}
+
+module dog_wheel_spacer()
+{
+    difference()
+    {
+        cylinder(h=wheelSpacerHeight, d = wheelSpacerDiameter, $fn=360);
+        translate([0,0, -delta * 0.5])
+            cylinder(h=wheelSpacerHeight + delta, d=wheelShaftDiameter / scaleFactor, $fn=360);
+    }
+}
+
+module dog_wheel_assembled()
+{
+    color(wheelColor, 1.0)
+    if (showWheels)
+    {
+        dog_wheel();
+        
+        translate([0, 0, -wheelWidth * 0.5-wheelSpacerHeight])
+                dog_wheel_spacer();
+    }       
 }
 
 module dog_wheel()
 {
+	color(wheelColor, 1.0)
     if (showWheels)
     {
-        color(wheelColor, 1.0)
-            difference()
-            {
-                rotate([0, 0, - $t * 360 * 6])
-                    translate([0.6, -1.1, 0])// centering
-                        linear_extrude(height = wheelWidth, convexity=6, center = true) 
-                            import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
-                cylinder(h = wheelWidth + delta, d = wheelShaftDiameter / scaleFactor, center = true, $fn = 360);
-            }
+        translate([0, 0, wheelWidth * 0.5])
+            dog_wheel_spacer();
+        difference()
+        {
+            rotate([0, 0, - $t * 360 * 6])
+                translate([0.6, -1.1, 0])// centering
+                    linear_extrude(height = wheelWidth, convexity=6, center = true) 
+                        import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
+            cylinder(h = wheelWidth + delta, d = wheelShaftDiameter / scaleFactor, center = true, $fn = 360);
+        }
 
         if (showDebugFigures)
         {
