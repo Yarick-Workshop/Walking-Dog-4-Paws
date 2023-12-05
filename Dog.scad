@@ -138,15 +138,12 @@ module dog_side()
                 translate([coord[0], coord[1], 0])
                 {
                     screw_hole(sideWidth);
-                    
-                    translate([0, 0, sideWidth * 0.5 - screwHeaderDepth / scaleFactor])
-                        cylinder(h = screwHeaderDepth / scaleFactor + delta, d = screwHeaderDiameter / scaleFactor, $fn = 360);
                 }
             }
             for (wheelCoord = wheelCoords)
             {
                 translate([wheelCoord[0], wheelCoord[1], 0])
-                    cylinder(h = sideWidth * 100 + delta, d = wheelShaftDiameter / scaleFactor, center = true);
+                    screw_hole(mediumWidth);
             }
         }
     }
@@ -219,6 +216,9 @@ module dog_wheel()
 module screw_hole(height)
 {
     cylinder(h = height + delta, d = screwHoleDiameter / scaleFactor, center = true, $fn=360);
+    
+    translate([0, 0, sideWidth * 0.5 - screwHeaderDepth / scaleFactor])
+        cylinder(h = screwHeaderDepth / scaleFactor + delta, d = screwHeaderDiameter / scaleFactor, $fn = 360);
 }
 
 module debug_figure()
