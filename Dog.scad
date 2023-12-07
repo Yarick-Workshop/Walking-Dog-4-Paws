@@ -1,10 +1,13 @@
-rounding = 10;
 
 /* [General] */
-expectedLength = 150;
+expectedLength = 112;
+
+/* [Screws] */
 screwHoleDiameter = 3;
-screwHeaderDiameter = 6;
-screwHeaderDepth = 2;
+screwHeaderDiameter = 7;
+screwHeaderDepth = 2.2;
+screwNutDiameter = 7;
+screwNutDepth = 2.2;
 
 /* [Debug] */
 showDebugFigures = false;
@@ -21,12 +24,12 @@ wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange,
 /* [Sides] */
 showLeftSide = true;
 showRightSide = true;
-sideWidth = 17;
+sideWidth = 25;
 sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Medium] */
 showMedium = true;
-mediumWidth = 45;
+mediumWidth = 55;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 
@@ -47,14 +50,21 @@ scaleFactor = expectedLength / sideRealLength;
 wheelSpacerHeight = (mediumWidth - wheelWidth - 2 * wheelSpacerOffset / scaleFactor) * 0.5;
 
 // debug information
-echo();
-echo("Side shift: ", sideShift);
+echo();echo();
+/*echo("Side shift: ", sideShift);
+echo();*/
 echo("Scale factor: ", scaleFactor);
-echo("Real wheel diameter ", wheelRealDiameter);
-echo("Real side length ", sideRealLength);
-echo("Real side heigh ", sideRealHeight);
-echo("Scaled side width: ", sideWidth * scaleFactor);
 echo();
+echo("Result wheel diameter ", wheelRealDiameter * scaleFactor);
+echo();
+echo("Result side length ", sideRealLength * scaleFactor);
+echo("Result side heigh ", sideRealHeight * scaleFactor);
+echo("Result side width: ", sideWidth * scaleFactor);
+echo();
+echo("Result medium width: ", mediumWidth * scaleFactor);
+echo();
+echo("Result total width: ", (2 * sideWidth + mediumWidth) * scaleFactor);
+echo();echo();
 
 
 //difference()
@@ -110,7 +120,7 @@ module dog_left_side()
     {
         translate([0, 0, sideWidth * 0.5])
             mirror([0, 0, 1])
-            dog_side();
+            dog_side("left");
     }
 }
 
@@ -119,12 +129,16 @@ module dog_right_side()
     if (showRightSide)
     {
         translate([0, 0, sideWidth * 1.5 + mediumWidth])
-            dog_side();
+            dog_side("right");
     }
 }
 
-module dog_side()
+module dog_side(side)
 {
+    assert(side=="left" || side == "right", str("Side should be either \"left\" or \"right\" but not \"", side, "\"."));
+    
+    screwHead = side == "left";
+    
     color(sideColor, 1.0)
     difference()
     {
@@ -137,13 +151,13 @@ module dog_side()
             {
                 translate([coord[0], coord[1], 0])
                 {
-                    screw_hole(sideWidth);
+                    screw_hole_with_groove(sideWidth, screwHead);
                 }
             }
             for (wheelCoord = wheelCoords)
             {
                 translate([wheelCoord[0], wheelCoord[1], 0])
-                    screw_hole(mediumWidth);
+                    screw_hole_with_groove(sideWidth, screwHead);
             }
         }
     }
@@ -216,9 +230,18 @@ module dog_wheel()
 module screw_hole(height)
 {
     cylinder(h = height + delta, d = screwHoleDiameter / scaleFactor, center = true, $fn=360);
+}
+
+module screw_hole_with_groove(height, screwHead)
+{
+    screw_hole(height);
     
-    translate([0, 0, sideWidth * 0.5 - screwHeaderDepth / scaleFactor])
-        cylinder(h = screwHeaderDepth / scaleFactor + delta, d = screwHeaderDiameter / scaleFactor, $fn = 360);
+    depth = (screwHead ? screwHeaderDepth : screwNutDepth) / scaleFactor;
+    diameter = (screwHead ?  screwHeaderDiameter : screwNutDiameter) / scaleFactor;
+    $fn = screwHead ? 360 : 6;
+
+    translate([0, 0, sideWidth * 0.5 - depth])
+		cylinder(h = depth + delta, d = diameter);
 }
 
 module debug_figure()
