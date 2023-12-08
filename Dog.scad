@@ -1,6 +1,7 @@
 
 /* [General] */
 expectedLength = 112;
+renderingType = "Preview";//["Preview", "Producing"]
 
 /* [Screws] */
 screwHoleDiameter = 3;
@@ -67,24 +68,50 @@ echo("Result total width: ", (2 * sideWidth + mediumWidth) * scaleFactor);
 echo();echo();
 
 
-//difference()
-//translate([$t * 2000, 0, 0])
-//translate([0, 0, scaleFactor * sideRealHeight * 0.5])*/
-rotate([0, 0, 360 * $t])
-translate([0, -1000, 0])
-rotate([90,0,0])//s
 scale([scaleFactor, scaleFactor, scaleFactor])
-dog_assembled();
-
-module dog_assembled()
 {
-    dog_left_side();
+    if (renderingType == "Producing")
+        dog_for_producing();
+    else
+        dog_for_preview();
+}
+
+module dog_for_producing()
+{
+    translate([0, 0, sideWidth * 0.5])
+        rotate([0, 180, 180])
+            dog_left_side();
     
-    dog_right_side();
+    translate([0, sideRealHeight * 0.95, sideWidth * 0.5])
+        dog_right_side();
     
-    dog_medium();
+    translate([+sideRealLength * 0.6, sideRealHeight * 0.3, mediumWidth * 0.5])
+        rotate([0, 0, 270]) 
+            dog_medium();
     
-    dog_wheels();
+    translate([0.35 * sideRealLength, sideRealHeight * 0.5, 0])
+        dog_wheel_spacer();
+
+    translate([-0.17 * sideRealLength, sideRealHeight * 1.27, wheelWidth * 0.5])
+        dog_wheel();
+}
+
+module dog_for_preview()
+{
+    translate([0, 0, sideRealHeight * 0.65])
+	rotate([90,0,0])
+	{
+	    translate([0, 0, sideWidth * 0.5])
+	        dog_left_side();
+	    
+	    translate([0, 0, sideWidth * 1.5 + mediumWidth])
+	        dog_right_side();
+	    
+	    translate([0, 0, sideWidth + mediumWidth * 0.5])
+	        dog_medium();
+	    
+	    dog_wheels();
+    }
 }
 
 module dog_medium()
@@ -92,7 +119,6 @@ module dog_medium()
     if (showMedium)
     {
         color(mediumColor, 1.0)
-        translate([0, 0, sideWidth + mediumWidth * 0.5])       
             difference()
             {
                 linear_extrude(height = mediumWidth, convexity=2, center = true)
@@ -118,8 +144,7 @@ module dog_left_side()
 {
     if (showLeftSide)
     {
-        translate([0, 0, sideWidth * 0.5])
-            mirror([0, 0, 1])
+        mirror([0, 0, 1])
             dog_side("left");
     }
 }
@@ -128,8 +153,7 @@ module dog_right_side()
 {
     if (showRightSide)
     {
-        translate([0, 0, sideWidth * 1.5 + mediumWidth])
-            dog_side("right");
+        dog_side("right");
     }
 }
 
@@ -181,6 +205,7 @@ module dog_wheels()
 
 module dog_wheel_spacer()
 {
+    color(wheelColor, 1.0)
     difference()
     {
         cylinder(h=wheelSpacerHeight, d = wheelSpacerDiameter, $fn=360);
