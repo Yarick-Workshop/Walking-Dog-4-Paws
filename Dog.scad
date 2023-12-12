@@ -94,6 +94,10 @@ module dog_for_producing()
 
     translate([-0.17 * sideRealLength, sideRealHeight * 1.27, wheelWidth * 0.5])
         dog_wheel();
+    
+    translate([-0.16 * sideRealLength, -sideRealHeight * 0.15, 0]) 
+        rotate([0, 0, 90]) 
+        	customization_figures();
 }
 
 module dog_for_preview()
@@ -272,4 +276,34 @@ module screw_hole_with_groove(height, screwHead)
 module debug_figure()
 {
     cylinder(h = 100, r = 0.5, center = true, $fn=360);
+}
+
+module customization_figures()
+{
+    maxDiameter = max(screwHeaderDiameter, wheelShaftDiameter);
+    testCubeWidth = maxDiameter * 1.3 / scaleFactor;
+
+    // screw head
+    translate([0, testCubeWidth * 1.1, sideWidth * 0.5]) 
+	    difference()
+	    {
+	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
+	        screw_hole_with_groove(sideWidth, true);
+	    }
+
+    // screw nut
+    translate([0, 0, sideWidth * 0.5]) 
+	    difference()
+	    {
+	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
+	        screw_hole_with_groove(sideWidth, false);
+	    }
+
+    // wheel shaft
+    translate([0, -testCubeWidth * 1.1, sideWidth * 0.5]) 
+	    difference()
+	    {
+	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
+	        cylinder(h = sideWidth / scaleFactor, d = wheelShaftDiameter / scaleFactor, center=true, $fn=360);
+	    }
 }
