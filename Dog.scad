@@ -4,9 +4,9 @@ expectedLength = 112;
 renderingType = "Preview";//["Preview", "Producing"]
 
 /* [Screws] */
-screwHoleDiameter = 3;
-screwHeaderDiameter = 7;
-screwHeaderDepth = 2.2;
+screwHoleDiameter = 3.5;
+screwHeaderDiameter = 6.5;
+screwHeaderDepth = 2.5;
 screwNutDiameter = 7;
 screwNutDepth = 2.2;
 
@@ -95,7 +95,7 @@ module dog_for_producing()
     translate([-0.17 * sideRealLength, sideRealHeight * 1.27, wheelWidth * 0.5])
         dog_wheel();
     
-    translate([-0.16 * sideRealLength, -sideRealHeight * 0.15, 0]) 
+    translate([-0.3 * sideRealLength, -sideRealHeight * 0.5, 0]) 
         rotate([0, 0, 90]) 
         	customization_figures();
 }
@@ -281,7 +281,7 @@ module debug_figure()
 module customization_figures()
 {
     maxDiameter = max(screwHeaderDiameter, wheelShaftDiameter);
-    testCubeWidth = maxDiameter * 1.3 / scaleFactor;
+    testCubeWidth = maxDiameter * 2.5 / scaleFactor;
 
     // screw head
     translate([0, testCubeWidth * 1.1, sideWidth * 0.5]) 
