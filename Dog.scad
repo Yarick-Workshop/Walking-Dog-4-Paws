@@ -4,10 +4,10 @@ expectedLength = 112;
 renderingType = "Preview";//["Preview", "Producing"]
 
 /* [Screws] */
-screwHoleDiameter = 3.5;
-screwHeaderDiameter = 6.5;
+screwHoleDiameter = 3;
+screwHeaderDiameter = 6;
 screwHeaderDepth = 2.4;
-screwNutDiameter = 7;
+screwNutDiameter = 6.5;
 screwNutDepth = 2.4;
 
 /* [Debug] */
@@ -17,7 +17,7 @@ showDebugFigures = false;
 /* [Wheels] */
 showWheels = true;
 wheelWidth = 21;
-wheelShaftDiameter = 4.5;
+wheelShaftDiameter = 5;
 wheelSpacerDiameter = 35;
 wheelSpacerOffset = 0.6;
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
