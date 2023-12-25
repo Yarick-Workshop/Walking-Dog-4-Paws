@@ -18,7 +18,7 @@ showDebugFigures = false;
 showWheels = true;
 wheelWidth = 21;
 wheelShaftDiameter = 5;
-wheelSpacerDiameter = 35;
+wheelSpacerDiameter = 40;
 wheelSpacerOffset = 0.6;
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
@@ -57,6 +57,7 @@ echo();*/
 echo("Scale factor: ", scaleFactor);
 echo();
 echo("Result wheel diameter ", wheelRealDiameter * scaleFactor);
+echo("Result wheel spacer wall thickness", (wheelSpacerDiameter * scaleFactor - wheelShaftDiameter) / 2);
 echo();
 echo("Result side length ", sideRealLength * scaleFactor);
 echo("Result side heigh ", sideRealHeight * scaleFactor);
