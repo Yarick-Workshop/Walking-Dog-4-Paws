@@ -40,7 +40,7 @@ wheelRealDiameter = 212;
 sideRealLength = 559.026;
 sideRealHeight = 329.776;
 delta = 0.05;
-wheelPlaceDiameter = 235;
+wheelPlaceDiameter = wheelRealDiameter * 1.05;
 
 sideMountingHoleCoords = [[165, 35], [-48.3, -25], [-215, 80], [-230, 15]];
 
