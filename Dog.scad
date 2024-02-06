@@ -1,4 +1,3 @@
-
 /* [General] */
 expectedLength = 112;
 renderingType = "Preview";//["Preview", "Producing"]
@@ -12,7 +11,6 @@ screwNutDepth = 2.4;
 
 /* [Debug] */
 showDebugFigures = false;
-
 
 /* [Wheels] */
 showWheels = true;
@@ -32,9 +30,6 @@ sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, 
 showMedium = true;
 mediumWidth = 11.01914;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
-
-
-
 
 /* [Hidden] */
 sideShift = 15.01;
@@ -60,17 +55,22 @@ wheelCoords = [[-159.7 * scaleFactor, -115.33 * scaleFactor],
 
 // debug information
 echo();echo();
-echo("Scale factor: ", scaleFactor);
+echo("Results: ");
+echo("  Scale factor: ", scaleFactor);
 echo();
-echo("Result wheel diameter ", wheelRealDiameter * scaleFactor);
-echo("Result wheel spacer wall thickness", (wheelSpacerDiameter - wheelShaftDiameter) * 0.5);
+echo("  Wheel: ");
+echo("      Diameter: ", wheelRealDiameter * scaleFactor);
+echo("      Spacer wall thickness: ", (wheelSpacerDiameter - wheelShaftDiameter) * 0.5);
+echo("      Width: ", wheelWidth);
 echo();
-echo("Result side length ", sideRealLength * scaleFactor);
-echo("Result side heigh ", sideRealHeight * scaleFactor);
+echo("  Side: ");
+echo("      Total length: ", sideRealLength * scaleFactor);
+echo("      Total height: ", sideRealHeight * scaleFactor);
 echo();
-echo("Result total width: ", 2 * sideWidth + mediumWidth);
+echo("  Others: ");
+echo("      Total width: ", 2 * sideWidth + mediumWidth);
+echo("      Screw rod length: ", 2 * sideWidth + mediumWidth - screwHeaderDepth);
 echo();echo();
-
 
 
 if (renderingType == "Producing")
