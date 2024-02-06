@@ -16,22 +16,24 @@ showDebugFigures = false;
 
 /* [Wheels] */
 showWheels = true;
-wheelSpacerHeight = 14.0052;
+wheelSpacerHeight = 2.8059138096;
 wheelShaftDiameter = 5;
-wheelSpacerDiameter = 40;
+wheelSpacerDiameter = 8.01392;
 wheelSpacerOffset = 0.6;
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Sides] */
 showLeftSide = true;
 showRightSide = true;
-sideWidth = 25;
+sideWidth = 5.00871;
 sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Medium] */
 showMedium = true;
-mediumWidth = 55;
+mediumWidth = 11.01914;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
+
+
 
 
 /* [Hidden] */
@@ -40,72 +42,73 @@ wheelRealDiameter = 212;
 sideRealLength = 559.026;
 sideRealHeight = 329.776;
 delta = 0.05;
-wheelPlaceDiameter = wheelRealDiameter * 1.05;
-
-sideMountingHoleCoords = [[165, 35], [-48.3, -25], [-215, 80], [-230, 15]];
-
-wheelCoords = [[-159.7, -115.33], [64.25, -111.8]];
 
 
 // calculations
 scaleFactor = expectedLength / sideRealLength;
-wheelWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset / scaleFactor));
+wheelWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
+wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
 
+//TODO refactor it, too many repeating of scaleFactor
+sideMountingHoleCoords = [[165 * scaleFactor, 35 * scaleFactor], 
+    [-48.3 * scaleFactor, -25 * scaleFactor], 
+    [-215 * scaleFactor, 80 * scaleFactor], 
+    [-230 * scaleFactor, 15 * scaleFactor]];
+
+wheelCoords = [[-159.7 * scaleFactor, -115.33 * scaleFactor],
+    [64.25 * scaleFactor, -111.8 * scaleFactor]];
 
 // debug information
 echo();echo();
-/*echo("Side shift: ", sideShift);
-echo();*/
 echo("Scale factor: ", scaleFactor);
 echo();
 echo("Result wheel diameter ", wheelRealDiameter * scaleFactor);
-echo("Result wheel spacer wall thickness", (wheelSpacerDiameter * scaleFactor - wheelShaftDiameter) / 2);
+echo("Result wheel spacer wall thickness", (wheelSpacerDiameter - wheelShaftDiameter) * 0.5);
 echo();
 echo("Result side length ", sideRealLength * scaleFactor);
 echo("Result side heigh ", sideRealHeight * scaleFactor);
-echo("Result side width: ", sideWidth * scaleFactor);
 echo();
-echo("Result medium width: ", mediumWidth * scaleFactor);
-echo();
-echo("Result total width: ", (2 * sideWidth + mediumWidth) * scaleFactor);
+echo("Result total width: ", 2 * sideWidth + mediumWidth);
 echo();echo();
 
 
-scale([scaleFactor, scaleFactor, scaleFactor])
-{
-    if (renderingType == "Producing")
-        dog_for_producing();
-    else
-        dog_for_preview();
-}
+
+if (renderingType == "Producing")
+    dog_for_producing();
+else
+    dog_for_preview();
+
 
 module dog_for_producing()
 {
+    sideScaledHeigh = sideRealHeight * scaleFactor;
+    sideScaledLength = sideRealLength * scaleFactor;
+
     translate([0, 0, sideWidth * 0.5])
         rotate([0, 180, 180])
             dog_left_side();
     
-    translate([0, sideRealHeight * 0.95, sideWidth * 0.5])
+    translate([0, sideScaledHeigh * 0.95, sideWidth * 0.5])
         dog_right_side();
     
-    translate([+sideRealLength * 0.6, sideRealHeight * 0.3, mediumWidth * 0.5])
+    translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumWidth * 0.5])
         rotate([0, 0, 270]) 
             dog_medium();
     
-    translate([0.35 * sideRealLength, sideRealHeight * 0.5, 0])
+    translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
         dog_wheel_spacer();
 
-    translate([-0.17 * sideRealLength, sideRealHeight * 1.27, wheelWidth * 0.5])
+    translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.27, wheelWidth * 0.5])
         dog_wheel();
     
-    translate([-0.3 * sideRealLength, -sideRealHeight * 0.5, 0]) 
+    translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.5, 0]) 
         rotate([0, 0, 90]) 
         	customization_figures();
 }
 
 module dog_for_preview()
 {
-    translate([0, 0, sideRealHeight * 0.65])
+    translate([0, 0, sideRealHeight * 0.65 * scaleFactor])
 	rotate([90,0,0])
 	{
 	    translate([0, 0, sideWidth * 0.5])
@@ -128,8 +131,9 @@ module dog_medium()
         color(mediumColor, 1.0)
             difference()
             {
-                linear_extrude(height = mediumWidth, convexity=2, center = true)
-                    import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
+                scale([scaleFactor, scaleFactor, 1]) 
+                    linear_extrude(height = mediumWidth, convexity=2, center = true)
+                        import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
                 union()
                 {
                     for(coord = sideMountingHoleCoords)
@@ -173,9 +177,10 @@ module dog_side(side)
     color(sideColor, 1.0)
     difference()
     {
-        translate([0, sideShift, 0])
-            linear_extrude(height = sideWidth, convexity=10, center = true)
-                import(file = "dog_4_scad_side.svg", $fn=360, center = true);
+        scale([scaleFactor, scaleFactor, 1]) 
+            translate([0, sideShift, 0])
+                linear_extrude(height = sideWidth, convexity=10, center = true)
+                    import(file = "dog_4_scad_side.svg", $fn=360, center = true);
         union()
         {
             for(coord = sideMountingHoleCoords)
@@ -195,9 +200,10 @@ module dog_side(side)
 
     if (showDebugFigures)
     {
-        translate([0, sideShift, 0])
-            color(undef)
-                cube([sideRealLength, sideRealHeight, sideWidth * 0.5], center = true);
+        color(undef)
+            scale([scaleFactor, scaleFactor, 1])
+                translate([0, sideShift, 0])
+                    cube([sideRealLength, sideRealHeight, sideWidth * 0.5], center = true);
     }
 }
 
@@ -217,7 +223,7 @@ module dog_wheel_spacer()
     {
         cylinder(h=wheelSpacerHeight, d = wheelSpacerDiameter, $fn=360);
         translate([0,0, -delta * 0.5])
-            cylinder(h=wheelSpacerHeight + delta, d=wheelShaftDiameter / scaleFactor, $fn=360);
+            cylinder(h=wheelSpacerHeight + delta, d=wheelShaftDiameter, $fn=360);
     }
 }
 
@@ -243,33 +249,35 @@ module dog_wheel()
         difference()
         {
             rotate([0, 0, - $t * 360 * 6])
-                translate([0.6, -1.1, 0])// centering
-                    linear_extrude(height = wheelWidth, convexity=6, center = true) 
-                        import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
-            cylinder(h = wheelWidth + delta, d = wheelShaftDiameter / scaleFactor, center = true, $fn = 360);
+                scale([scaleFactor, scaleFactor, 1]) 
+                    translate([0.6, -1.1, 0])// centering
+                        linear_extrude(height = wheelWidth, convexity=6, center = true) 
+                            import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
+            cylinder(h = wheelWidth + delta, d = wheelShaftDiameter, center = true, $fn = 360);
         }
 
         if (showDebugFigures)
         {
             debug_figure();
             
-            //for centering wheels 
-            //cylinder(h=wheelWidth - 0.5, d = wheelRealDiameter, center=true, $fn=360);
+            //for centering wheels
+            scale([scaleFactor, scaleFactor, 1]) 
+                cylinder(h=wheelWidth - 0.5, d = wheelRealDiameter, center=true, $fn=360);
         }
     }
 }
 
 module screw_hole(height)
 {
-    cylinder(h = height + delta, d = screwHoleDiameter / scaleFactor, center = true, $fn=360);
+    cylinder(h = height + delta, d = screwHoleDiameter, center = true, $fn=360);
 }
 
 module screw_hole_with_groove(height, screwHead)
 {
     screw_hole(height);
     
-    depth = (screwHead ? screwHeaderDepth : screwNutDepth) / scaleFactor;
-    diameter = (screwHead ?  screwHeaderDiameter : screwNutDiameter) / scaleFactor;
+    depth = (screwHead ? screwHeaderDepth : screwNutDepth);
+    diameter = (screwHead ?  screwHeaderDiameter : screwNutDiameter);
     $fn = screwHead ? 360 : 6;
 
     translate([0, 0, sideWidth * 0.5 - depth])
@@ -284,7 +292,7 @@ module debug_figure()
 module customization_figures()
 {
     maxDiameter = max(screwHeaderDiameter, wheelShaftDiameter);
-    testCubeWidth = maxDiameter * 2.5 / scaleFactor;
+    testCubeWidth = maxDiameter * 2.5;
 
     // screw head
     translate([0, testCubeWidth * 1.1, sideWidth * 0.5]) 
@@ -307,6 +315,6 @@ module customization_figures()
 	    difference()
 	    {
 	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
-	        cylinder(h = sideWidth / scaleFactor, d = wheelShaftDiameter / scaleFactor, center=true, $fn=360);
+	        cylinder(h = sideWidth, d = wheelShaftDiameter, center=true, $fn=360);
 	    }
 }
