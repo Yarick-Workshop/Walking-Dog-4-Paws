@@ -16,7 +16,7 @@ showDebugFigures = false;
 
 /* [Wheels] */
 showWheels = true;
-wheelWidth = 21;
+wheelSpacerHeight = 14.0052;
 wheelShaftDiameter = 5;
 wheelSpacerDiameter = 40;
 wheelSpacerOffset = 0.6;
@@ -46,9 +46,11 @@ sideMountingHoleCoords = [[165, 35], [-48.3, -25], [-215, 80], [-230, 15]];
 
 wheelCoords = [[-159.7, -115.33], [64.25, -111.8]];
 
+
 // calculations
 scaleFactor = expectedLength / sideRealLength;
-wheelSpacerHeight = (mediumWidth - wheelWidth - 2 * wheelSpacerOffset / scaleFactor) * 0.5;
+wheelWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset / scaleFactor));
+
 
 // debug information
 echo();echo();
