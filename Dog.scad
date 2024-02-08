@@ -94,9 +94,12 @@ module dog_for_producing()
     translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumWidth * 0.5])
         rotate([0, 0, 270]) 
             dog_medium();
-    
-    translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
-        dog_wheel_spacer();
+
+    if (showWheels)
+    {
+        translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
+            dog_wheel_spacer();
+    }
 
     translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.27, wheelWidth * 0.5])
         dog_wheel();
