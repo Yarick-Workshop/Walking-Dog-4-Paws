@@ -294,6 +294,7 @@ module debug_figure()
 
 module customization_figures()
 {
+    $fn = 8;
     maxDiameter = max(screwHeaderDiameter, wheelShaftDiameter);
     testCubeWidth = maxDiameter * 2.5;
 
@@ -301,7 +302,7 @@ module customization_figures()
     translate([0, testCubeWidth * 1.1, sideWidth * 0.5]) 
 	    difference()
 	    {
-	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
+	        cylinder(h = sideWidth, d = testCubeWidth, center=true);
 	        screw_hole_with_groove(sideWidth, true);
 	    }
 
@@ -309,7 +310,7 @@ module customization_figures()
     translate([0, 0, sideWidth * 0.5]) 
 	    difference()
 	    {
-	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
+	        cylinder(h = sideWidth, d = testCubeWidth, center=true);
 	        screw_hole_with_groove(sideWidth, false);
 	    }
 
@@ -317,7 +318,7 @@ module customization_figures()
     translate([0, -testCubeWidth * 1.1, sideWidth * 0.5]) 
 	    difference()
 	    {
-	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
+	        cylinder(h = sideWidth, d = testCubeWidth, center=true);
 	        cylinder(h = sideWidth + delta, d = wheelShaftDiameter, center=true, $fn=360);
 	    }
 }
