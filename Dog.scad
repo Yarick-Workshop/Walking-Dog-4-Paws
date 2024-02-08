@@ -318,6 +318,6 @@ module customization_figures()
 	    difference()
 	    {
 	        cube([testCubeWidth, testCubeWidth, sideWidth], center=true);
-	        cylinder(h = sideWidth, d = wheelShaftDiameter, center=true, $fn=360);
+	        cylinder(h = sideWidth + delta, d = wheelShaftDiameter, center=true, $fn=360);
 	    }
 }
