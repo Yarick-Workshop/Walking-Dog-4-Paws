@@ -14,21 +14,21 @@ showDebugFigures = false;
 
 /* [Wheels] */
 showWheels = true;
-wheelSpacerHeight = 2.8059138096;
+wheelSpacerHeight = 2.8;
 wheelShaftDiameter = 4.7;
-wheelSpacerDiameter = 8.01392;
+wheelSpacerDiameter = 8.0;
 wheelSpacerOffset = 0.6;
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Sides] */
 showLeftSide = true;
 showRightSide = true;
-sideWidth = 5.00871;
+sideWidth = 5.0;
 sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Medium] */
 showMedium = true;
-mediumWidth = 11.01914;
+mediumWidth = 11.0;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Hidden] */
