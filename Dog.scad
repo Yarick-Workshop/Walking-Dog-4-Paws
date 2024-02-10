@@ -98,7 +98,7 @@ module dog_for_producing()
     if (showWheels)
     {
         translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
-            dog_wheel_spacer();
+            dog_wheel_spacer(wheelSpacerHeight);
     }
 
     translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.27, wheelWidth * 0.5])
@@ -219,14 +219,14 @@ module dog_wheels()
     }
 }
 
-module dog_wheel_spacer()
+module dog_wheel_spacer(currentHeight)
 {
     color(wheelColor, 1.0)
     difference()
     {
-        cylinder(h=wheelSpacerHeight, d = wheelSpacerDiameter, $fn=360);
+		cylinder(h=currentHeight, d = wheelSpacerDiameter, $fn=360);
         translate([0,0, -delta * 0.5])
-            cylinder(h=wheelSpacerHeight + delta, d=wheelShaftDiameter, $fn=360);
+            cylinder(h=currentHeight + delta, d=wheelShaftDiameter, $fn=360);
     }
 }
 
@@ -238,7 +238,7 @@ module dog_wheel_assembled()
         dog_wheel();
         
         translate([0, 0, -wheelWidth * 0.5-wheelSpacerHeight])
-                dog_wheel_spacer();
+                dog_wheel_spacer(wheelSpacerHeight);
     }       
 }
 
@@ -247,8 +247,7 @@ module dog_wheel()
 	color(wheelColor, 1.0)
     if (showWheels)
     {
-        translate([0, 0, wheelWidth * 0.5])
-            dog_wheel_spacer();
+        dog_wheel_spacer(wheelSpacerHeight + wheelWidth * 0.5);
         difference()
         {
             rotate([0, 0, - $t * 360 * 6])
