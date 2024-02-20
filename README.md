@@ -5,7 +5,7 @@
 
 A 3D model of a walking dog toy. The model was designed for producing on a 3D printer.
 
-**It is not finished yet!** So if you decide to make it it is entirely at your own risk. 
+**Documentation is in-progress:** In case of any questions – contact the author in Telegram group (see below).
 
 # Contact Us
 To folow the progress go to my channels:
