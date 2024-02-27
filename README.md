@@ -12,7 +12,7 @@ This work is licensed under a
 
 # Walking Dog 3D Model
 <p align="center" width="100%">
-    <img width="50%" src="/media/logo.png">
+    <img width="50%" src="media/logo.png">
 </p>
 
 A 3D model of a walking dog toy. The model was designed for producing on a 3D printer.
@@ -22,12 +22,22 @@ A 3D model of a walking dog toy. The model was designed for producing on a 3D pr
 
 ## HOWTO
 
-Before assembling read the topic to the bottom!
+⚠️ Before assembling read the topic to the bottom!
 
+This 3D model is highly customizable. So you can configure it for you needs.
+
+
+### Pre-rendered STL
+
+If you do not need any customizations and would only like to have the same "Walking dog" toy as I have – you can download prerendered STL files from Thingiverse: https://www.thingiverse.com/thing:6499100. 
+
+**But do not be in hurry and read the manual there as well**. First of all print only the test figures and check if your fasteners and shafts fit well.
+
+In case the test figures are not fit or you would like to customize the walking dog – you can "polish" the model's parameters.
 
 ### Model Parameters
 
-This 3D model is highly customizable. I used self-explanatory names for OpenSCAD model parameters. But if you still have any questions – [contact me](#contact-me).
+I used self-explanatory names for OpenSCAD model parameters. But if you still have any questions – [contact me](#contact-me).
 
 There are two modes: "Preview" and "Producing". See "General" -> "renderingType" parameter. "Preview" allows to see the toy as if it was assembled. ⚠️ **If you are going to print parts** – choose "Producing".
 
