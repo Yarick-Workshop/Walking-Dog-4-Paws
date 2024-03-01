@@ -24,9 +24,9 @@
             "wheelColor": "White",
             "wheelRealDiameter": "212",
             "wheelShaftDiameter": "4.7",
-            "wheelSpacerDiameter": "8",
-            "wheelSpacerHeight": "2.8",
-            "wheelSpacerOffset": "0.6"
+            "wheelSpacerDiameter": "13",
+            "wheelSpacerHeight": "1",
+            "wheelSpacerOffset": "0.3"
         }
     },
     "parameterSets": "",
