@@ -25,8 +25,8 @@
             "wheelRealDiameter": "212",
             "wheelShaftDiameter": "4.7",
             "wheelSpacerDiameter": "13",
-            "wheelSpacerHeight": "1",
-            "wheelSpacerOffset": "0.3"
+            "wheelSpacerHeight": "0.8",
+            "wheelSpacerOffset": "0.6"
         }
     },
     "parameterSets": "",
