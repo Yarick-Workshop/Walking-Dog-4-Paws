@@ -39,7 +39,11 @@ In case the test figures are not fit or you would like to customize the walking 
 
 I used self-explanatory names for OpenSCAD model parameters. But if you still have any questions – [contact me](#contact-me).
 
-There are two modes: "Preview" and "Producing". See "General" -> "renderingType" parameter. "Preview" allows to see the toy as if it was assembled. ⚠️ **If you are going to print parts** – choose "Producing".
+There are two modes: *"Preview"* and *"Producing"*. See *"General"* -> *"renderingType"* parameter. *"Preview"* allows to see the toy as if it was assembled. ⚠️ **If you are going to print parts** – choose *"Producing"*.
+
+**If you'd like to have wide paws** – there are two options:
+ 1) Select the preset *"Wide Paws"* (See on the top of Customizer panel). **But** in this case all your parameter changes will be reset to defaults.
+ 2) Play with parameters *wheelSpacerHeight* and *wheelSpacerDiameter* from the *Wheels* group.
 
 After modifying parameters look in OpenSCAD Console. Calculated debugging values were added there:
 
