@@ -1,6 +1,8 @@
 /* [General] */
 expectedLength = 112;
 renderingType = "Preview";//["Preview", "Producing"]
+rounding = "Off";//["Off", "Cone", "Sphere"]
+roundingRadius = 2.5;
 
 /* [Screws] */
 screwHoleDiameter = 3.35;
@@ -101,7 +103,7 @@ module dog_for_producing()
             dog_wheel_spacer(wheelSpacerHeight);
     }
 
-    translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.27, wheelWidth * 0.5])
+    translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, wheelWidth * 0.5])
         dog_wheel();
     
     translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.5, 0]) 
@@ -134,9 +136,7 @@ module dog_medium()
         color(mediumColor, 1.0)
             difference()
             {
-                scale([scaleFactor, scaleFactor, 1]) 
-                    linear_extrude(height = mediumWidth, convexity=2, center = true)
-                        import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
+                dog_medium_internal();
                 union()
                 {
                     for(coord = sideMountingHoleCoords)
@@ -153,6 +153,34 @@ module dog_medium()
             }
     }
 }
+
+module dog_medium_internal()
+{
+    if (isRoundingOn())
+    {
+        minkowski(convexity=10)
+        {
+            translate([0, 0, -roundingRadius * 0.5]) 
+                dog_medium_extrude(_medium_scale_factor = (expectedLength - 2 * roundingRadius) / sideRealLength, 
+                    _medium_width = mediumWidth - roundingRadius);
+            cylinder(h = roundingRadius, r = roundingRadius, $fn=24);
+        }
+    }
+    else
+    {
+        dog_medium_extrude(_medium_scale_factor = scaleFactor, 
+            _medium_width = mediumWidth);
+    }
+}
+
+module dog_medium_extrude(_medium_scale_factor, _medium_width)
+{
+    scale([_medium_scale_factor, _medium_scale_factor, 1]) 
+        linear_extrude(height = _medium_width, convexity=2, center = true)
+            import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
+}
+
+function isRoundingOn() = rounding != "Off" && roundingRadius != 0;
 
 module dog_left_side()
 {
@@ -180,10 +208,7 @@ module dog_side(side)
     color(sideColor, 1.0)
     difference()
     {
-        scale([scaleFactor, scaleFactor, 1]) 
-            translate([0, sideShift, 0])
-                linear_extrude(height = sideWidth, convexity=10, center = true)
-                    import(file = "dog_4_scad_side.svg", $fn=360, center = true);
+        dog_side_internal();
         union()
         {
             for(coord = sideMountingHoleCoords)
@@ -208,6 +233,49 @@ module dog_side(side)
                 translate([0, sideShift, 0])
                     cube([sideRealLength, sideRealHeight, sideWidth * 0.5], center = true);
     }
+}
+
+module dog_side_internal()
+{
+    if (isRoundingOn())
+    {
+        minkowski(convexity=10) 
+        {
+            translate([0, 0, -roundingRadius * 0.5]) 
+                dog_side_extrude(_side_scale_factor = (expectedLength - 2 * roundingRadius) / sideRealLength, 
+                    _side_width = sideWidth - roundingRadius);
+            if (rounding == "Cone")
+            {
+                cylinder(h = roundingRadius, r1 = roundingRadius, r2 = 0, $fn=24);
+            }
+            else if (rounding == "Sphere")
+            {
+                difference() 
+                {
+                    sphere(r = roundingRadius, $fn=24);
+                    translate([0, 0, - 0.5 * roundingRadius]) 
+                        cube([2 * roundingRadius, 2 * roundingRadius, roundingRadius], center=true);
+                }
+            }
+            else 
+            { 
+                assert(false, "Only \"Cone\" and \"Sphere\" are supported for rounding!");
+            }
+        }
+    }
+    else
+    {
+        dog_side_extrude(_side_scale_factor = scaleFactor, 
+            _side_width = sideWidth);
+    }
+}
+
+module dog_side_extrude(_side_scale_factor, _side_width)
+{
+    scale([_side_scale_factor, _side_scale_factor, 1]) 
+        translate([0, sideShift, 0])
+            linear_extrude(height = _side_width, convexity=10, center = true)
+                import(file = "dog_4_scad_side.svg", $fn=360, center = true);
 }
 
 module dog_wheels()
