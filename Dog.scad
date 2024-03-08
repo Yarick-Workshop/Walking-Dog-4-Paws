@@ -221,12 +221,15 @@ module dog_wheels()
 
 module dog_wheel_spacer(currentHeight)
 {
-    color(wheelColor, 1.0)
-    difference()
-    {
-		cylinder(h=currentHeight, d = wheelSpacerDiameter, $fn=360);
-        translate([0,0, -delta * 0.5])
-            cylinder(h=currentHeight + delta, d=wheelShaftDiameter, $fn=360);
+    if (currentHeight != 0)
+    {    
+        color(wheelColor, 1.0)
+        difference()
+        {
+            cylinder(h=currentHeight, d = wheelSpacerDiameter, $fn=360);
+            translate([0,0, -delta * 0.5])
+                cylinder(h=currentHeight + delta, d=wheelShaftDiameter, $fn=360);
+        }
     }
 }
 
