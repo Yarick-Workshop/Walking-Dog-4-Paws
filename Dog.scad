@@ -74,7 +74,7 @@ echo("      Total width: ", 2 * sideWidth + mediumWidth);
 echo("      Screw rod length: ", 2 * sideWidth + mediumWidth - screwHeaderDepth);
 echo();echo();
 
-
+rotate([0,0,360*$t])
 if (renderingType == "Producing")
     dog_for_producing();
 else
@@ -158,7 +158,7 @@ module dog_medium_internal()
 {
     if (isRoundingOn())
     {
-        minkowski(convexity=10)
+        minkowski(convexity=20)
         {
             translate([0, 0, -roundingRadius * 0.5]) 
                 dog_medium_extrude(_medium_scale_factor = (expectedLength - 2 * roundingRadius) / sideRealLength, 
@@ -176,7 +176,7 @@ module dog_medium_internal()
 module dog_medium_extrude(_medium_scale_factor, _medium_width)
 {
     scale([_medium_scale_factor, _medium_scale_factor, 1]) 
-        linear_extrude(height = _medium_width, convexity=2, center = true)
+        linear_extrude(height = _medium_width, convexity=20, center = true)
             import(file = "dog_4_scad_medium.svg", $fn=360, center = true);
 }
 
@@ -239,7 +239,7 @@ module dog_side_internal()
 {
     if (isRoundingOn())
     {
-        minkowski(convexity=10) 
+        minkowski(convexity=20) 
         {
             translate([0, 0, -roundingRadius * 0.5]) 
                 dog_side_extrude(_side_scale_factor = (expectedLength - 2 * roundingRadius) / sideRealLength, 
@@ -274,7 +274,7 @@ module dog_side_extrude(_side_scale_factor, _side_width)
 {
     scale([_side_scale_factor, _side_scale_factor, 1]) 
         translate([0, sideShift, 0])
-            linear_extrude(height = _side_width, convexity=10, center = true)
+            linear_extrude(height = _side_width, convexity=20, center = true)
                 import(file = "dog_4_scad_side.svg", $fn=360, center = true);
 }
 
@@ -318,10 +318,10 @@ module dog_wheel()
         dog_wheel_spacer(wheelSpacerHeight + wheelWidth * 0.5);
         difference()
         {
-            rotate([0, 0, - $t * 360 * 6])
+           // rotate([0, 0, - $t * 360 * 6])
                 scale([scaleFactor, scaleFactor, 1]) 
                     translate([0.6, -1.1, 0])// centering
-                        linear_extrude(height = wheelWidth, convexity=6, center = true) 
+                        linear_extrude(height = wheelWidth, convexity=20, center = true) 
                             import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
             cylinder(h = wheelWidth + delta, d = wheelShaftDiameter, center = true, $fn = 360);
         }
