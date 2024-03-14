@@ -104,7 +104,12 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 |Filament| ~ 100 g | With different(?) colours|
 |3D printer|1| Or a friend with a 3D printer 😉|
 
-⚠️ If you have everything from the table above **follow the next assembling video manual**: https://youtu.be/4ERVy12Y__E
+⚠️ If you have everything from the table above **follow the next assembling video manual(-s)**: 
+
+|URL|Description|
+|--|--|
+|https://youtu.be/4ERVy12Y__E|**REQUIRED!** The root assembly manual. It contains the main principles / approaches  |
+|https://youtu.be/j4FVfsxbM0o|**OPTIONAL!** Watch if You prefer the wide paws as I do. 🙂|
 
 Yeah it is in Russian but there are English subtitles too. I tried to do my best translating them to English. But if you see something could be fixed - [let me know](#contact-me) please and I will update the text. The same for text here as well. Thank you in advance!
 
