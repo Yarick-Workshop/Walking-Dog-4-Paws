@@ -49,10 +49,10 @@ sideScaleFactor = isRoundingOn() ? (expectedLength - 2 * roundingRadius) / sideR
 
 //TODO refactor it, too many repeating of scaleFactor
 sideMountingHoleCoords = [
-    [165 * sideScaleFactor, 35 * scaleFactor], //eyes
-    [-48.3 * scaleFactor, -25 * scaleFactor], // above the paws
-    [-215 * sideScaleFactor, 80 * scaleFactor], //tale
-    [-230 * sideScaleFactor, 15 * scaleFactor]];
+    [165 * sideScaleFactor, 35 * scaleFactor],  // "eye"
+    [-48.3 * scaleFactor, -25 * scaleFactor],   // above the paws
+    [-215 * sideScaleFactor, 80 * scaleFactor], // tail #1
+    [-230 * sideScaleFactor, 15 * scaleFactor]];// tail #2
 
 wheelCoords = [[-159.7 * scaleFactor, -115.33 * scaleFactor],
     [64.25 * scaleFactor, -111.8 * scaleFactor]];
