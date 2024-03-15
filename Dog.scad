@@ -2,7 +2,7 @@
 expectedLength = 112;
 renderingType = "Preview";//["Preview", "Producing"]
 rounding = "Off";//["Off", "Cone", "Sphere"]
-roundingRadius = 2.5;
+roundingRadius = 2.0;
 
 /* [Screws] */
 screwHoleDiameter = 3.35;
@@ -45,12 +45,14 @@ delta = 0.05;
 scaleFactor = expectedLength / sideRealLength;
 wheelWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
 wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
+sideScaleFactor = isRoundingOn() ? (expectedLength - 2 * roundingRadius) / sideRealLength :  scaleFactor;//TODO generalize it across the file
 
 //TODO refactor it, too many repeating of scaleFactor
-sideMountingHoleCoords = [[165 * scaleFactor, 35 * scaleFactor], 
-    [-48.3 * scaleFactor, -25 * scaleFactor], 
-    [-215 * scaleFactor, 80 * scaleFactor], 
-    [-230 * scaleFactor, 15 * scaleFactor]];
+sideMountingHoleCoords = [
+    [165 * sideScaleFactor, 35 * scaleFactor], //eyes
+    [-48.3 * scaleFactor, -25 * scaleFactor], // above the paws
+    [-215 * sideScaleFactor, 80 * scaleFactor], //tale
+    [-230 * sideScaleFactor, 15 * scaleFactor]];
 
 wheelCoords = [[-159.7 * scaleFactor, -115.33 * scaleFactor],
     [64.25 * scaleFactor, -111.8 * scaleFactor]];
