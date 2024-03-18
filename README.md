@@ -94,14 +94,15 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 |Name|Quantity|Comment|
 |--|--|--|
 |Drill bit ⌀ 3 mm(?)|1|In my case it was not required|
-|Drill bit ⌀ 4.5 mm|1||
+|Drill bit ⌀ 3.2 mm|1|To drill paw shafts|
+|Drill bit ⌀ 4.5-4.8 mm|1|To polish paw holes|
 |Drill|1|Even a primitive one because it will be used for drilling plastic parts only|
-|Gel pen refill ⌀ ~4.3 mm|1|It will be used as a shaft for paw-wheels|
+|PTFE tube ⌀ 4 mm or a gel pen refill ⌀ ~4.3 mm|1|It will be used for the paw-wheels shaft. **PTFE tube is much better** but a pen refill can be used instead|
 |M3 x 20 screws|5||
 |M3 nuts|5||
 |Screw driver|1||
 |File|1|To shorten the screws|
-|Filament| ~ 100 g | With different(?) colours|
+|Filament| ~ 65 - 70 g | With different(?) colours|
 |3D printer|1| Or a friend with a 3D printer 😉|
 
 
