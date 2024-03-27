@@ -52,9 +52,9 @@ I used self-explanatory names for OpenSCAD model parameters. But if you still ha
         |Value|Description|Correct name as for real engineers|Takes time to apply|
         |--|--|--|--|
         |*"Off"*|Neither rounding or chamfer|-|Less than a second|
-        |*"Cone"*|"Conical rounding"|**Chamfer**|~25 minutes|
-        |*"Sphere"*|"Spherical rounding"|**Rounding**|~45 minutes|
-    * *roundingRadius* – rounding radius / chamfer height (depending on selected value of the *"rounding"* parameter);
+        |*"Cone"*|Conical rounding|**Chamfer**|~25 minutes|
+        |*"Sphere"*|Spherical rounding|**Rounding**|~45 minutes|
+    * *"roundingRadius"* – rounding radius / chamfer height (depending on selected value of the *"rounding"* parameter);
 
 
 
