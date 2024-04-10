@@ -29,7 +29,9 @@ This 3D model is highly customizable. So you can configure it for you needs.
 
 ### Pre-rendered STL
 
-If you do not need any customizations and would only like to have the same "Walking dog" toy as I have – you can download prerendered STL files from Thingiverse: https://www.thingiverse.com/thing:6499100. 
+If you do not need any customizations and would only like to have the same "Walking dog" toy as I have – you can download prerendered STL files from Thingiverse: 
+ * https://www.thingiverse.com/thing:6499100 - angular version;
+ * https://www.thingiverse.com/thing:6572654 - version with rounding or chamfer.
 
 **But do not be in hurry and read the manual there as well**. First of all print only the test figures and check if your fasteners and shafts fit well.
 
@@ -125,6 +127,8 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 |--|--|
 |https://youtu.be/4ERVy12Y__E|**REQUIRED!** The root assembly manual. It contains the main principles / approaches  |
 |https://youtu.be/j4FVfsxbM0o|**OPTIONAL!** Watch if You prefer the wide paws as I do. 🙂|
+|https://youtu.be/0HYvyKCRPyY|**OPTIONAL!** But if you'd like to have a toy with rounding or chamfer - **REQUIRED!** |
+
 
 
 Yeah, they are both in Russian but there are English subtitles too. I tried to do my best translating them to English. But if you see something could be fixed - [let me know](#contact-me) please and I will update the text. The same for text here as well. Thank you in advance!
