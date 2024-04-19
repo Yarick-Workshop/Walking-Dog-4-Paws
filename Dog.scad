@@ -76,6 +76,9 @@ echo("      Total width: ", 2 * sideWidth + mediumWidth);
 echo("      Screw rod length: ", 2 * sideWidth + mediumWidth - screwHeaderDepth);
 echo();echo();
 
+
+use <Dog-Paw-Library.scad>
+
 rotate([0,0,360*$t])
 if (renderingType == "Producing")
     dog_for_producing();
@@ -99,14 +102,28 @@ module dog_for_producing()
         rotate([0, 0, 270]) 
             dog_medium();
 
-    if (showWheels)
-    {
-        translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
-            dog_wheel_spacer(wheelSpacerHeight);
-    }
+    color(wheelColor) 
+        if (showWheels)
+        {
+            translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
+                dog_wheel_spacer(height = wheelSpacerHeight,
+                                diameter = wheelSpacerDiameter,
+                                shaftDiameter = wheelShaftDiameter,
+                                delta= delta);
 
-    translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, wheelWidth * 0.5])
-        dog_wheel();
+
+            translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, wheelWidth * 0.5])
+                dog_wheel(
+                    wheelWidth = wheelWidth,
+                    spacerHeight = wheelSpacerHeight,
+                    spacerDiameter = wheelSpacerDiameter,
+                    scaleFactor = scaleFactor,
+                    shaftDiameter = wheelShaftDiameter,
+                    delta = delta,
+                    wheelRealDiameter = wheelRealDiameter,
+                    showDebugFigures = showDebugFigures
+                );
+        }
     
     translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.5, 0]) 
         rotate([0, 0, 90]) 
@@ -233,14 +250,22 @@ module dog_side_extrude(_side_scale_factor, _side_width)
 
 module dog_wheels_assembled()
 {
-    for (wheelCoord = wheelCoords)
-    {
-        translate([wheelCoord[0], wheelCoord[1], sideWidth + mediumWidth * 0.5])
-            dog_wheel_assembled();
-    }
+    color(wheelColor)
+        for (wheelCoord = wheelCoords)
+        {
+            translate([wheelCoord[0], wheelCoord[1], sideWidth + mediumWidth * 0.5])
+                dog_wheel_assembled(
+                        wheelWidth = wheelWidth,
+                        spacerHeight = wheelSpacerHeight,
+                        spacerDiameter = wheelSpacerDiameter,
+                        scaleFactor = scaleFactor,
+                        shaftDiameter = wheelShaftDiameter,
+                        delta = delta,
+                        wheelRealDiameter = wheelRealDiameter,
+                        showDebugFigures = showDebugFigures
+                    );
+        }
 }
-
-include <Dog-Paw-Library.scad>
 
 module screw_hole(height)
 {
