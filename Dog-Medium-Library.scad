@@ -1,31 +1,50 @@
-module dog_medium()
+use <Dog-Utils.scad>
+
+module dog_medium(
+    mediumWidth,
+    expectedLength,
+    sideRealLength,
+    scaleFactor,
+    hasRounding,
+    roundingRadius,
+    wheelPlaceDiameter,
+    sideMountingHoleCoords,
+    wheelCoords,
+    delta,
+    screwHoleDiameter)
 {
-    if (showMedium)
+    difference()
     {
-        color(mediumColor, 1.0)
-            difference()
+        dog_medium_internal(mediumWidth = mediumWidth,
+            expectedLength = expectedLength,
+            sideRealLength = sideRealLength,
+            scaleFactor = scaleFactor,
+            hasRounding = hasRounding,
+            roundingRadius = roundingRadius);
+        union()
+        {
+            for(coord = sideMountingHoleCoords)
             {
-                dog_medium_internal();
-                union()
-                {
-                    for(coord = sideMountingHoleCoords)
-                    {
-                        translate([coord[0], coord[1], 0])
-                            screw_hole(mediumWidth);
-                    }
-                    for (wheelCoord = wheelCoords)
-                    {
-                        translate([wheelCoord[0], wheelCoord[1], 0])
-                                cylinder(h = mediumWidth + delta, d = wheelPlaceDiameter, center=true, $fn = 360);
-                    }
-                }
+                translate([coord[0], coord[1], 0])
+                    screw_hole(height = mediumWidth, diameter = screwHoleDiameter, delta = delta);
             }
+            for (wheelCoord = wheelCoords)
+            {
+                translate([wheelCoord[0], wheelCoord[1], 0])
+                        cylinder(h = mediumWidth + delta, d = wheelPlaceDiameter, center=true, $fn = 360);
+            }
+        }
     }
 }
 
-module dog_medium_internal()
+module dog_medium_internal(mediumWidth,
+    expectedLength,
+    sideRealLength,
+    scaleFactor,
+    hasRounding,
+    roundingRadius)
 {
-    if (isRoundingOn())
+    if (hasRounding)
     {
         minkowski(convexity=20)
         {

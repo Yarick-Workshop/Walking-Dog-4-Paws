@@ -77,7 +77,10 @@ echo("      Screw rod length: ", 2 * sideWidth + mediumWidth - screwHeaderDepth)
 echo();echo();
 
 
+use <Dog-Utils.scad>
 use <Dog-Paw-Library.scad>
+use <Dog-Medium-Library.scad>
+
 
 rotate([0,0,360*$t])
 if (renderingType == "Producing")
@@ -98,11 +101,27 @@ module dog_for_producing()
     translate([0, sideScaledHeigh * 0.95, sideWidth * 0.5])
         dog_right_side();
     
-    translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumWidth * 0.5])
-        rotate([0, 0, 270]) 
-            dog_medium();
+    color(mediumColor, 1.0);
+    if (showMedium)
+    {
+        translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumWidth * 0.5])
+            rotate([0, 0, 270]) 
+                dog_medium(
+                        mediumWidth = mediumWidth,
+                        expectedLength = expectedLength,
+                        sideRealLength = sideRealLength,
+                        scaleFactor = scaleFactor,
+                        hasRounding = isRoundingOn(),
+                        roundingRadius = roundingRadius,
+                        wheelPlaceDiameter = wheelPlaceDiameter,
+                        sideMountingHoleCoords = sideMountingHoleCoords,
+                        wheelCoords = wheelCoords,
+                        delta = delta,
+                        screwHoleDiameter = screwHoleDiameter
+                        );
+    }
 
-    color(wheelColor) 
+    color(wheelColor, 1.0) 
         if (showWheels)
         {
             translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
@@ -141,14 +160,27 @@ module dog_for_preview()
 	    translate([0, 0, sideWidth * 1.5 + mediumWidth])
 	        dog_right_side();
 	    
-	    translate([0, 0, sideWidth + mediumWidth * 0.5])
-	        dog_medium();
+        color(mediumColor, 1.0)
+        if (showMedium)
+        {
+            translate([0, 0, sideWidth + mediumWidth * 0.5])
+                dog_medium(
+                        mediumWidth = mediumWidth,
+                        expectedLength = expectedLength,
+                        sideRealLength = sideRealLength,
+                        scaleFactor = scaleFactor,
+                        hasRounding = isRoundingOn(),
+                        roundingRadius = roundingRadius,
+                        wheelPlaceDiameter = wheelPlaceDiameter,
+                        sideMountingHoleCoords = sideMountingHoleCoords,
+                        wheelCoords = wheelCoords,
+                        delta = delta,
+                        screwHoleDiameter = screwHoleDiameter);
+        }
 	    
 	    dog_wheels_assembled();
     }
 }
-
-include <Dog-Medium-Library.scad>
 
 function isRoundingOn() = rounding != "Off" && roundingRadius != 0;
 
@@ -250,7 +282,7 @@ module dog_side_extrude(_side_scale_factor, _side_width)
 
 module dog_wheels_assembled()
 {
-    color(wheelColor)
+    color(wheelColor, 1.0)
     if (showWheels)
     {    
         for (wheelCoord = wheelCoords)
@@ -270,14 +302,11 @@ module dog_wheels_assembled()
     }
 }
 
-module screw_hole(height)
-{
-    cylinder(h = height + delta, d = screwHoleDiameter, center = true, $fn=360);
-}
-
 module screw_hole_with_groove(height, screwHead)
 {
-    screw_hole(height);
+    screw_hole(height = height, 
+        diameter = screwHoleDiameter,
+        delta = delta);
     
     depth = (screwHead ? screwHeaderDepth : screwNutDepth);
     diameter = (screwHead ?  screwHeaderDiameter : screwNutDiameter);
