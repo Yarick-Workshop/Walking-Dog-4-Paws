@@ -251,6 +251,8 @@ module dog_side_extrude(_side_scale_factor, _side_width)
 module dog_wheels_assembled()
 {
     color(wheelColor)
+    if (showWheels)
+    {    
         for (wheelCoord = wheelCoords)
         {
             translate([wheelCoord[0], wheelCoord[1], sideWidth + mediumWidth * 0.5])
@@ -265,6 +267,7 @@ module dog_wheels_assembled()
                         showDebugFigures = showDebugFigures
                     );
         }
+    }
 }
 
 module screw_hole(height)
