@@ -131,7 +131,7 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 
 
 
-*Yeah, all the videso are in Russian but there are English subtitles too. I tried to do my best translating them to English. But if you see something could be fixed - [let me know](#contact-me) please and I will update the text. The same for text here as well. Thank you in advance!*
+*Yeah, all the videos are in Russian but there are English subtitles too. I tried to do my best translating them to English. But if you see something could be fixed - [let me know](#contact-me) please and I will update the text. The same for text here as well. Thank you in advance!*
 
 
 ## Contact me
