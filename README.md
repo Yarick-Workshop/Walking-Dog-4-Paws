@@ -37,20 +37,20 @@ If you do not need any customizations and would only like to have the same "Walk
 
 In case the test figures are not fit or you would like to customize the walking dog – you can "polish" the model's parameters.
 
+There are several *".scad"* files in the project folder. Most of them are just libraries. Open **"Dog.scad"** to get the 3D model itself.
+
 ### Model Parameters
 
 I used self-explanatory names for OpenSCAD model parameters. But if you still have any questions – [contact me](#contact-me).
 
 ⚠️ **Pay attention:**
-1) There are several *".scad"* files in the project folder. Most of them are just libraries. Open **"Dog.scad"** to get the 3D model itself;
+1) There are two modes: *"Preview"* and *"Producing"*. See *"General"* -> *"renderingType"* parameter. *"Preview"* allows to see the toy as if it was assembled. **If you are going to print parts** – choose *"Producing"*;
 
-2) There are two modes: *"Preview"* and *"Producing"*. See *"General"* -> *"renderingType"* parameter. *"Preview"* allows to see the toy as if it was assembled. **If you are going to print parts** – choose *"Producing"*;
-
-3) To have **the wide paws** :
+2) To have **the wide paws** :
     * Select the preset *"Wide Paws"* (See on the top of *"Customizer"* panel). **But in this case all your parameter changes will be reset to defaults**;
     * Play with parameters *"wheelSpacerHeight"* and *"wheelSpacerDiameter"* from the *"Wheels"* group;
 
-4) If you'd like to have **the rounded corners or chamfers** on the model - there are two parameters (see the *"General"* group):
+3) If you'd like to have **the rounded corners or chamfers** on the model - there are two parameters (see the *"General"* group):
     * *"rounding"*  – rounding type. **It takes too much time** to apply the effect. So, adjust any other parameters and apply either rounding or chamfer at the latest stage. And take some coffee 😉. Possible values:
         |Value|Description|Correct name as for real engineers|Takes time to apply|
         |--|--|--|--|
