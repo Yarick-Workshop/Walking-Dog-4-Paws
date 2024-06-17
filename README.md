@@ -47,7 +47,7 @@ I used self-explanatory names for OpenSCAD model parameters. But if you still ha
 2) There are two modes: *"Preview"* and *"Producing"*. See *"General"* -> *"renderingType"* parameter. *"Preview"* allows to see the toy as if it was assembled. **If you are going to print parts** – choose *"Producing"*;
 
 3) To have **the wide paws** :
-    * Select the preset *"Wide Paws"* (See on the top of *"Customizer panel"*). **But in this case all your parameter changes will be reset to defaults**;
+    * Select the preset *"Wide Paws"* (See on the top of *"Customizer"* panel). **But in this case all your parameter changes will be reset to defaults**;
     * Play with parameters *"wheelSpacerHeight"* and *"wheelSpacerDiameter"* from the *"Wheels"* group;
 
 4) If you'd like to have **the rounded corners or chamfers** on the model - there are two parameters (see the *"General"* group):
