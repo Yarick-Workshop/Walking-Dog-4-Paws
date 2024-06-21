@@ -1,6 +1,6 @@
 /* [General] */
 expectedLength = 112;
-renderingType = "Preview";//["Preview", "Producing"]
+renderingType = "Producing";//["Preview", "Producing"]
 rounding = "Off";//["Off", "Cone", "Sphere"]
 roundingRadius = 2.0;
 
@@ -17,6 +17,9 @@ showDebugFigures = false;
 /* [Wheels] */
 showWheels = true;
 wheelSpacerHeight = 2.8;
+wheelInternalSpacerHeight = 30;
+wheelInternalSpacerDiameter = 8;
+wheelClutchHeight = 10;
 wheelShaftDiameter = 4.7;
 wheelSpacerDiameter = 8.0;
 wheelSpacerOffset = 0.6;
@@ -30,7 +33,7 @@ sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, 
 
 /* [Medium] */
 showMedium = true;
-mediumWidth = 11.0;
+mediumWidth = 40.0;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Hidden] */
@@ -43,7 +46,9 @@ delta = 0.05;
 
 // calculations
 scaleFactor = expectedLength / sideRealLength;
-wheelWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
+wheelPairWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
+wheelWidth = (wheelPairWidth -  wheelInternalSpacerHeight) / 2;
+wheelInternalHalfSpacerHeight = (wheelInternalSpacerHeight + wheelClutchHeight) / 2;
 wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
 sideScaleFactor = isRoundingOn() ? (expectedLength - 2 * roundingRadius) / sideRealLength :  scaleFactor;//TODO generalize it across the file
 
@@ -65,7 +70,7 @@ echo();
 echo("  Wheel: ");
 echo("      Diameter: ", wheelRealDiameter * scaleFactor);
 echo("      Spacer wall thickness: ", (wheelSpacerDiameter - wheelShaftDiameter) * 0.5);
-echo("      Width: ", wheelWidth);
+echo("      Wheel pair width: ", wheelPairWidth);
 echo();
 echo("  Side: ");
 echo("      Total length: ", sideRealLength * scaleFactor);
@@ -131,16 +136,17 @@ module dog_for_producing()
                                 delta= delta);
 
 
-            translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, wheelWidth * 0.5])
+            translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, 0])
                 dog_wheel(
                     wheelWidth = wheelWidth,
-                    spacerHeight = wheelSpacerHeight,
-                    spacerDiameter = wheelSpacerDiameter,
+                    spacerHeight = wheelInternalHalfSpacerHeight,
+                    spacerDiameter = wheelInternalSpacerDiameter,
                     scaleFactor = scaleFactor,
                     shaftDiameter = wheelShaftDiameter,
                     delta = delta,
                     wheelRealDiameter = wheelRealDiameter,
-                    showDebugFigures = showDebugFigures
+                    showDebugFigures = showDebugFigures,
+                    clutchHeight = wheelClutchHeight
                 );
         }
     
@@ -296,7 +302,10 @@ module dog_wheels_assembled()
                         shaftDiameter = wheelShaftDiameter,
                         delta = delta,
                         wheelRealDiameter = wheelRealDiameter,
-                        showDebugFigures = showDebugFigures
+                        showDebugFigures = showDebugFigures,
+                        clutchHeight = wheelClutchHeight,
+                        internalSpacerHeight = wheelInternalHalfSpacerHeight,
+                        internalSpacerDiameter = wheelInternalSpacerDiameter
                     );
         }
     }
