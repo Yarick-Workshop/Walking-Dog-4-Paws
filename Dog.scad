@@ -16,13 +16,17 @@ showDebugFigures = false;
 
 /* [Wheels] */
 showWheels = true;
-wheelSpacerHeight = 2.8;
-wheelInternalSpacerHeight = 25;
-wheelInternalSpacerDiameter = 8;
-wheelClutchHeight = 10;
-wheelShaftDiameter = 4.7;
-wheelSpacerDiameter = 8.0;
+wheelSpacerHeight = 0.8;
+wheelSpacerDiameter = 13;
 wheelSpacerOffset = 0.6;
+
+wheelInternalSpacerHeight = 8;
+wheelInternalSpacerDiameter = 8;
+
+wheelClutchHeight = 10;
+
+wheelShaftDiameter = 4.7;
+
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Sides] */
@@ -33,7 +37,7 @@ sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, 
 
 /* [Medium] */
 showMedium = true;
-mediumWidth = 40.0;
+mediumWidth = 20.0;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Hidden] */
