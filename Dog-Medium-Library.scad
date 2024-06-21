@@ -13,6 +13,7 @@ module dog_medium(
     delta,
     screwHoleDiameter)
 {
+    translate([0, 0, mediumWidth * 0.5]) 
     difference()
     {
         dog_medium_internal(mediumWidth = mediumWidth,

@@ -37,8 +37,11 @@ sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, 
 
 /* [Medium] */
 showMedium = true;
-mediumWidth = 20.0;
+mediumTotalWidth = 20.0;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
+mediumSideWidth = 5;
+mediumSideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
+
 
 /* [Hidden] */
 sideShift = 15.01;
@@ -50,7 +53,7 @@ delta = 0.05;
 
 // calculations
 scaleFactor = expectedLength / sideRealLength;
-wheelPairWidth = (mediumWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
+wheelPairWidth = (mediumTotalWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
 wheelWidth = (wheelPairWidth -  wheelInternalSpacerHeight) / 2;
 wheelInternalHalfSpacerHeight = (wheelInternalSpacerHeight + wheelClutchHeight) / 2;
 wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
@@ -81,8 +84,8 @@ echo("      Total length: ", sideRealLength * scaleFactor);
 echo("      Total height: ", sideRealHeight * scaleFactor);
 echo();
 echo("  Others: ");
-echo("      Total width: ", 2 * sideWidth + mediumWidth);
-echo("      Screw rod length: ", 2 * sideWidth + mediumWidth - screwHeaderDepth);
+echo("      Total width: ", 2 * sideWidth + mediumTotalWidth);
+echo("      Screw rod length: ", 2 * sideWidth + mediumTotalWidth - screwHeaderDepth);
 echo();echo();
 
 
@@ -113,10 +116,10 @@ module dog_for_producing()
     color(mediumColor, 1.0);
     if (showMedium)
     {
-        translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumWidth * 0.5])
+        translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumTotalWidth * 0.5])
             rotate([0, 0, 270]) 
                 dog_medium(
-                        mediumWidth = mediumWidth,
+                        mediumWidth = mediumTotalWidth,
                         expectedLength = expectedLength,
                         sideRealLength = sideRealLength,
                         scaleFactor = scaleFactor,
@@ -167,15 +170,16 @@ module dog_for_preview()
 	    translate([0, 0, sideWidth * 0.5])
 	        dog_left_side();
 	    
-	    translate([0, 0, sideWidth * 1.5 + mediumWidth])
+	    translate([0, 0, sideWidth * 1.5 + mediumTotalWidth])
 	        dog_right_side();
 	    
-        color(mediumColor, 1.0)
         if (showMedium)
         {
-            translate([0, 0, sideWidth + mediumWidth * 0.5])
+            translate([0, 0, sideWidth])
+            {//TODO get rid of duplications
+                color(mediumSideColor, 1.0)
                 dog_medium(
-                        mediumWidth = mediumWidth,
+                        mediumWidth = mediumSideWidth,
                         expectedLength = expectedLength,
                         sideRealLength = sideRealLength,
                         scaleFactor = scaleFactor,
@@ -186,6 +190,37 @@ module dog_for_preview()
                         wheelCoords = wheelCoords,
                         delta = delta,
                         screwHoleDiameter = screwHoleDiameter);
+
+                color(mediumColor, 1.0)
+                translate([0, 0, mediumSideWidth]) 
+                    dog_medium(
+                            mediumWidth = mediumTotalWidth - 2 * mediumSideWidth,
+                            expectedLength = expectedLength,
+                            sideRealLength = sideRealLength,
+                            scaleFactor = scaleFactor,
+                            hasRounding = isRoundingOn(),
+                            roundingRadius = roundingRadius,
+                            wheelPlaceDiameter = wheelPlaceDiameter,
+                            sideMountingHoleCoords = sideMountingHoleCoords,
+                            wheelCoords = wheelCoords,
+                            delta = delta,
+                            screwHoleDiameter = screwHoleDiameter);
+                
+                color(mediumSideColor, 1.0)
+                translate([0, 0, mediumTotalWidth - mediumSideWidth]) 
+                    dog_medium(
+                            mediumWidth = mediumSideWidth,
+                            expectedLength = expectedLength,
+                            sideRealLength = sideRealLength,
+                            scaleFactor = scaleFactor,
+                            hasRounding = isRoundingOn(),
+                            roundingRadius = roundingRadius,
+                            wheelPlaceDiameter = wheelPlaceDiameter,
+                            sideMountingHoleCoords = sideMountingHoleCoords,
+                            wheelCoords = wheelCoords,
+                            delta = delta,
+                            screwHoleDiameter = screwHoleDiameter);
+            }
         }
 	    
 	    dog_wheels_assembled();
