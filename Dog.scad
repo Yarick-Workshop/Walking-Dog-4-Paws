@@ -1,6 +1,6 @@
 /* [General] */
 expectedLength = 112;
-renderingType = "Producing";//["Preview", "Producing"]
+renderingType = "Preview";//["Preview", "Producing"]
 rounding = "Off";//["Off", "Cone", "Sphere"]
 roundingRadius = 2.0;
 
@@ -17,7 +17,7 @@ showDebugFigures = false;
 /* [Wheels] */
 showWheels = true;
 wheelSpacerHeight = 2.8;
-wheelInternalSpacerHeight = 30;
+wheelInternalSpacerHeight = 25;
 wheelInternalSpacerDiameter = 8;
 wheelClutchHeight = 10;
 wheelShaftDiameter = 4.7;
@@ -292,21 +292,50 @@ module dog_wheels_assembled()
     if (showWheels)
     {    
         for (wheelCoord = wheelCoords)
-        {
-            translate([wheelCoord[0], wheelCoord[1], sideWidth + mediumWidth * 0.5])
-                dog_wheel_assembled(
+        {//TODO get rid of duplications
+            translate([wheelCoord[0], wheelCoord[1], sideWidth + wheelSpacerOffset])
+            {
+                dog_wheel_spacer(height = wheelSpacerHeight,
+                            diameter = wheelSpacerDiameter,
+                            shaftDiameter = wheelShaftDiameter,
+                            delta = delta);
+
+                translate([0, 0, wheelSpacerHeight])
+                {
+                    dog_wheel(
                         wheelWidth = wheelWidth,
-                        spacerHeight = wheelSpacerHeight,
-                        spacerDiameter = wheelSpacerDiameter,
+                        spacerHeight = wheelInternalHalfSpacerHeight,
+                        spacerDiameter = wheelInternalSpacerDiameter,
                         scaleFactor = scaleFactor,
                         shaftDiameter = wheelShaftDiameter,
                         delta = delta,
                         wheelRealDiameter = wheelRealDiameter,
                         showDebugFigures = showDebugFigures,
-                        clutchHeight = wheelClutchHeight,
-                        internalSpacerHeight = wheelInternalHalfSpacerHeight,
-                        internalSpacerDiameter = wheelInternalSpacerDiameter
-                    );
+                        clutchHeight = wheelClutchHeight);
+
+                    translate([0, 0, 2 * wheelWidth + wheelInternalSpacerHeight]) 
+                    {
+                        rotate([180, 0, 180 + 45]) 
+                            dog_wheel(
+                                wheelWidth = wheelWidth,
+                                spacerHeight = wheelInternalHalfSpacerHeight,
+                                spacerDiameter = wheelInternalSpacerDiameter,
+                                scaleFactor = scaleFactor,
+                                shaftDiameter = wheelShaftDiameter,
+                                delta = delta,
+                                wheelRealDiameter = wheelRealDiameter,
+                                showDebugFigures = showDebugFigures,
+                                clutchHeight = wheelClutchHeight,
+                                isRightWheel = true);
+
+                        dog_wheel_spacer(height = wheelSpacerHeight,
+                            diameter = wheelSpacerDiameter,
+                            shaftDiameter = wheelShaftDiameter,
+                            delta = delta);
+                    }
+                }
+
+            }
         }
     }
 }

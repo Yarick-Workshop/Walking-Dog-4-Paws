@@ -11,37 +11,6 @@ module dog_wheel_spacer(height, diameter, shaftDiameter, delta)
     }
 }
 
-module dog_wheel_assembled(
-    wheelWidth,
-    spacerHeight,
-    spacerDiameter,
-    scaleFactor,
-    shaftDiameter,
-    delta,
-    wheelRealDiameter,
-    showDebugFigures,
-    clutchHeight,
-    internalSpacerHeight,
-    internalSpacerDiameter)
-{
-    dog_wheel(
-        wheelWidth = wheelWidth,
-        spacerHeight = internalSpacerHeight,
-        spacerDiameter = internalSpacerDiameter,
-        scaleFactor = scaleFactor,
-        shaftDiameter = shaftDiameter,
-        delta = delta,
-        wheelRealDiameter = wheelRealDiameter,
-        showDebugFigures = showDebugFigures,
-        clutchHeight = clutchHeight);
-    
-    translate([0, 0, -wheelWidth * 0.5-spacerHeight])
-            dog_wheel_spacer(height = spacerHeight,
-                            diameter = spacerDiameter,
-                            shaftDiameter = shaftDiameter,
-                            delta = delta);
-}
-
 module dog_wheel(
     wheelWidth,
     spacerHeight,
@@ -51,7 +20,9 @@ module dog_wheel(
     delta,
     wheelRealDiameter,
     showDebugFigures,
-    clutchHeight)
+    clutchHeight,
+    isRightWheel = false
+    )
 {
     translate([0, 0, wheelWidth * 0.5]) 
     {
@@ -62,16 +33,18 @@ module dog_wheel(
                             shaftDiameter = shaftDiameter,
                             delta = delta
                             );
-            translate([spacerDiameter * 0.5, 0, (wheelWidth - clutchHeight + delta) * 0.5 + spacerHeight ])
-                cube([spacerDiameter, spacerDiameter, clutchHeight + delta], center=true);
+            rotate([0, 0, 45 * 0.5])
+                translate([spacerDiameter * 0.5, 0, (wheelWidth - clutchHeight + delta) * 0.5 + spacerHeight ])
+                    cube([spacerDiameter, spacerDiameter, clutchHeight + delta], center=true);
         }
         difference()
         {
-            // rotate([0, 0, - $t * 360 * 6])
+            mirror( isRightWheel ? [1, 0, 0] : [0, 0, 1]) 
                 scale([scaleFactor, scaleFactor, 1]) 
                     translate([0.6, -1.1, 0])// centering
                         linear_extrude(height = wheelWidth, convexity=20, center = true) 
                             import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
+
             cylinder(h = wheelWidth + delta, d = shaftDiameter, center = true, $fn = 360);        
         }
 
