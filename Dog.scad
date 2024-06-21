@@ -20,10 +20,10 @@ wheelSpacerHeight = 0.8;
 wheelSpacerDiameter = 13;
 wheelSpacerOffset = 0.6;
 
-wheelInternalSpacerHeight = 8;
+wheelInternalSpacerHeight = 12;
 wheelInternalSpacerDiameter = 8;
 
-wheelClutchHeight = 10;
+wheelClutchHeight = 6;
 
 wheelShaftDiameter = 4.7;
 
@@ -37,9 +37,9 @@ sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, 
 
 /* [Medium] */
 showMedium = true;
-mediumTotalWidth = 20.0;
+mediumTotalWidth = 30.0;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
-mediumSideWidth = 5;
+mediumSideWidth = 8;
 mediumSideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 
