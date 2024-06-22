@@ -21,6 +21,7 @@ module dog_wheel(
     wheelRealDiameter,
     showDebugFigures,
     clutchHeight,
+    clutchOffset,
     isRightWheel
     )
 {
@@ -35,7 +36,7 @@ module dog_wheel(
                             );
             rotate([0, 0, 45 * 0.5])
                 translate([spacerDiameter * 0.5, 0, (wheelWidth - clutchHeight + delta) * 0.5 + spacerHeight ])
-                    cube([spacerDiameter, spacerDiameter, clutchHeight + delta], center=true);
+                    cube([spacerDiameter + clutchOffset, spacerDiameter + clutchOffset, clutchHeight + delta], center=true);
         }
         difference()
         {

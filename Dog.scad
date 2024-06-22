@@ -24,6 +24,7 @@ wheelInternalSpacerHeight = 8;
 wheelInternalSpacerDiameter = 8;
 
 wheelClutchHeight = 6;
+wheelClutchOffset = 0.25;
 
 wheelShaftDiameter = 4.7;
 
@@ -55,7 +56,7 @@ delta = 0.05;
 scaleFactor = expectedLength / sideRealLength;
 wheelPairWidth = (mediumTotalWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
 wheelWidth = (wheelPairWidth -  wheelInternalSpacerHeight) / 2;
-wheelInternalHalfSpacerHeight = (wheelInternalSpacerHeight + wheelClutchHeight) / 2;
+wheelInternalHalfSpacerHeight = (wheelInternalSpacerHeight + wheelClutchHeight - wheelClutchOffset) / 2;
 wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
 sideScaleFactor = isRoundingOn() ? (expectedLength - 2 * roundingRadius) / sideRealLength :  scaleFactor;//TODO generalize it across the file
 
@@ -393,6 +394,7 @@ module dog_wheel_internal(isRightWheel)
                 wheelRealDiameter = wheelRealDiameter,
                 showDebugFigures = showDebugFigures,
                 clutchHeight = wheelClutchHeight,
+                clutchOffset = wheelClutchOffset,
                 isRightWheel = isRightWheel);
 }
 
