@@ -2,7 +2,7 @@
 expectedLength = 112;
 renderingType = "Preview";//["Preview", "Producing"]
 rounding = "Off";//["Off", "Cone", "Sphere"]
-roundingRadius = 2.0;
+roundingRadius = 3.0;
 
 /* [Screws] */
 screwHoleDiameter = 3.35;
@@ -20,7 +20,7 @@ wheelSpacerHeight = 0.8;
 wheelSpacerDiameter = 13;
 wheelSpacerOffset = 0.6;
 
-wheelInternalSpacerHeight = 12;
+wheelInternalSpacerHeight = 8;
 wheelInternalSpacerDiameter = 8;
 
 wheelClutchHeight = 6;
@@ -37,7 +37,7 @@ sideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, 
 
 /* [Medium] */
 showMedium = true;
-mediumTotalWidth = 30.0;
+mediumTotalWidth = 25.0;
 mediumColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 mediumSideWidth = 8;
 mediumSideColor = "Brown";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
