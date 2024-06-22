@@ -21,7 +21,7 @@ module dog_wheel(
     wheelRealDiameter,
     showDebugFigures,
     clutchHeight,
-    isRightWheel = false
+    isRightWheel
     )
 {
     translate([0, 0, wheelWidth * 0.5]) 

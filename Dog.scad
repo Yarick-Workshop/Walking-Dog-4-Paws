@@ -113,49 +113,26 @@ module dog_for_producing()
     translate([0, sideScaledHeigh * 0.95, sideWidth * 0.5])
         dog_right_side();
     
-    color(mediumColor, 1.0);
     if (showMedium)
     {
-        translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, mediumTotalWidth * 0.5])
+        translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, 0])
             rotate([0, 0, 270]) 
-                dog_medium(
-                        mediumWidth = mediumTotalWidth,
-                        expectedLength = expectedLength,
-                        sideRealLength = sideRealLength,
-                        scaleFactor = scaleFactor,
-                        hasRounding = isRoundingOn(),
-                        roundingRadius = roundingRadius,
-                        wheelPlaceDiameter = wheelPlaceDiameter,
-                        sideMountingHoleCoords = sideMountingHoleCoords,
-                        wheelCoords = wheelCoords,
-                        delta = delta,
-                        screwHoleDiameter = screwHoleDiameter
-                        );
+                dog_medium_medium();
     }
 
     color(wheelColor, 1.0) 
-        if (showWheels)
-        {
-            translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
-                dog_wheel_spacer(height = wheelSpacerHeight,
-                                diameter = wheelSpacerDiameter,
-                                shaftDiameter = wheelShaftDiameter,
-                                delta= delta);
+    if (showWheels)
+    {
+        translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
+            dog_wheel_spacer(height = wheelSpacerHeight,
+                            diameter = wheelSpacerDiameter,
+                            shaftDiameter = wheelShaftDiameter,
+                            delta= delta);
 
 
-            translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, 0])
-                dog_wheel(
-                    wheelWidth = wheelWidth,
-                    spacerHeight = wheelInternalHalfSpacerHeight,
-                    spacerDiameter = wheelInternalSpacerDiameter,
-                    scaleFactor = scaleFactor,
-                    shaftDiameter = wheelShaftDiameter,
-                    delta = delta,
-                    wheelRealDiameter = wheelRealDiameter,
-                    showDebugFigures = showDebugFigures,
-                    clutchHeight = wheelClutchHeight
-                );
-        }
+        translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, 0])
+            dog_left_wheel();
+    }
     
     translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.5, 0]) 
         rotate([0, 0, 90]) 
@@ -176,50 +153,14 @@ module dog_for_preview()
         if (showMedium)
         {
             translate([0, 0, sideWidth])
-            {//TODO get rid of duplications
-                color(mediumSideColor, 1.0)
-                dog_medium(
-                        mediumWidth = mediumSideWidth,
-                        expectedLength = expectedLength,
-                        sideRealLength = sideRealLength,
-                        scaleFactor = scaleFactor,
-                        hasRounding = isRoundingOn(),
-                        roundingRadius = roundingRadius,
-                        wheelPlaceDiameter = wheelPlaceDiameter,
-                        sideMountingHoleCoords = sideMountingHoleCoords,
-                        wheelCoords = wheelCoords,
-                        delta = delta,
-                        screwHoleDiameter = screwHoleDiameter);
+            {
+                dog_medium_side();
 
-                color(mediumColor, 1.0)
                 translate([0, 0, mediumSideWidth]) 
-                    dog_medium(
-                            mediumWidth = mediumTotalWidth - 2 * mediumSideWidth,
-                            expectedLength = expectedLength,
-                            sideRealLength = sideRealLength,
-                            scaleFactor = scaleFactor,
-                            hasRounding = isRoundingOn(),
-                            roundingRadius = roundingRadius,
-                            wheelPlaceDiameter = wheelPlaceDiameter,
-                            sideMountingHoleCoords = sideMountingHoleCoords,
-                            wheelCoords = wheelCoords,
-                            delta = delta,
-                            screwHoleDiameter = screwHoleDiameter);
+                    dog_medium_medium();
                 
-                color(mediumSideColor, 1.0)
                 translate([0, 0, mediumTotalWidth - mediumSideWidth]) 
-                    dog_medium(
-                            mediumWidth = mediumSideWidth,
-                            expectedLength = expectedLength,
-                            sideRealLength = sideRealLength,
-                            scaleFactor = scaleFactor,
-                            hasRounding = isRoundingOn(),
-                            roundingRadius = roundingRadius,
-                            wheelPlaceDiameter = wheelPlaceDiameter,
-                            sideMountingHoleCoords = sideMountingHoleCoords,
-                            wheelCoords = wheelCoords,
-                            delta = delta,
-                            screwHoleDiameter = screwHoleDiameter);
+                    dog_medium_side();
             }
         }
 	    
@@ -331,7 +272,7 @@ module dog_wheels_assembled()
     if (showWheels)
     {    
         for (wheelCoord = wheelCoords)
-        {//TODO get rid of duplications
+        {
             translate([wheelCoord[0], wheelCoord[1], sideWidth + wheelSpacerOffset])
             {
                 dog_wheel_spacer(height = wheelSpacerHeight,
@@ -341,31 +282,12 @@ module dog_wheels_assembled()
 
                 translate([0, 0, wheelSpacerHeight])
                 {
-                    dog_wheel(
-                        wheelWidth = wheelWidth,
-                        spacerHeight = wheelInternalHalfSpacerHeight,
-                        spacerDiameter = wheelInternalSpacerDiameter,
-                        scaleFactor = scaleFactor,
-                        shaftDiameter = wheelShaftDiameter,
-                        delta = delta,
-                        wheelRealDiameter = wheelRealDiameter,
-                        showDebugFigures = showDebugFigures,
-                        clutchHeight = wheelClutchHeight);
+                    dog_left_wheel();
 
                     translate([0, 0, 2 * wheelWidth + wheelInternalSpacerHeight]) 
                     {
                         rotate([180, 0, 180 + 45]) 
-                            dog_wheel(
-                                wheelWidth = wheelWidth,
-                                spacerHeight = wheelInternalHalfSpacerHeight,
-                                spacerDiameter = wheelInternalSpacerDiameter,
-                                scaleFactor = scaleFactor,
-                                shaftDiameter = wheelShaftDiameter,
-                                delta = delta,
-                                wheelRealDiameter = wheelRealDiameter,
-                                showDebugFigures = showDebugFigures,
-                                clutchHeight = wheelClutchHeight,
-                                isRightWheel = true);
+                            dog_right_wheel();
 
                         dog_wheel_spacer(height = wheelSpacerHeight,
                             diameter = wheelSpacerDiameter,
@@ -428,3 +350,64 @@ module customization_figures()
 	        cylinder(h = sideWidth + delta, d = wheelShaftDiameter, center=true, $fn=360);
 	    }
 }
+
+// Wheel helping methods: Begin
+
+module dog_left_wheel()
+{
+    dog_wheel_internal(false);
+}
+
+module dog_right_wheel()
+{
+    dog_wheel_internal(true);
+}
+
+module dog_wheel_internal(isRightWheel)
+{
+    dog_wheel(
+                wheelWidth = wheelWidth,
+                spacerHeight = wheelInternalHalfSpacerHeight,
+                spacerDiameter = wheelInternalSpacerDiameter,
+                scaleFactor = scaleFactor,
+                shaftDiameter = wheelShaftDiameter,
+                delta = delta,
+                wheelRealDiameter = wheelRealDiameter,
+                showDebugFigures = showDebugFigures,
+                clutchHeight = wheelClutchHeight,
+                isRightWheel = isRightWheel);
+}
+
+// Wheel helping methods: End
+
+
+// Medium helping methods: Begin
+
+module dog_medium_medium()
+{
+    dog_medium_part_internal(mediumColor, mediumTotalWidth - 2 * mediumSideWidth);
+}
+
+module dog_medium_side()
+{
+    dog_medium_part_internal(mediumSideColor, mediumSideWidth);
+}
+
+module dog_medium_part_internal(color, width)
+{
+    color(color, 1.0)
+    dog_medium(
+                mediumWidth = width,
+                expectedLength = expectedLength,
+                sideRealLength = sideRealLength,
+                scaleFactor = scaleFactor,
+                hasRounding = isRoundingOn(),
+                roundingRadius = roundingRadius,
+                wheelPlaceDiameter = wheelPlaceDiameter,
+                sideMountingHoleCoords = sideMountingHoleCoords,
+                wheelCoords = wheelCoords,
+                delta = delta,
+                screwHoleDiameter = screwHoleDiameter);
+}
+
+// Medium helping methods: End
