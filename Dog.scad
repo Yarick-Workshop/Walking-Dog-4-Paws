@@ -115,23 +115,41 @@ module dog_for_producing()
     
     if (showMedium)
     {
-        translate([+sideScaledLength * 0.6, sideScaledHeigh * 0.3, 0])
-            rotate([0, 0, 270]) 
-                dog_medium_medium();
+        translate([sideScaledHeigh * 1.8, sideScaledHeigh * 0.3, 0])
+        {
+            dog_medium_medium();
+        
+            translate([0, sideScaledHeigh * -0.7, 0])
+                dog_medium_side();
+            
+            translate([0, sideScaledHeigh * 0.7, 0])
+            dog_medium_side();
+        }
     }
 
     color(wheelColor, 1.0) 
     if (showWheels)
     {
         translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
+        {
             dog_wheel_spacer(height = wheelSpacerHeight,
                             diameter = wheelSpacerDiameter,
                             shaftDiameter = wheelShaftDiameter,
                             delta= delta);
 
+            translate([0, -1 * sideScaledHeigh, 0])
+                dog_wheel_spacer(height = wheelSpacerHeight,
+                                diameter = wheelSpacerDiameter,
+                                shaftDiameter = wheelShaftDiameter,
+                                delta= delta);
+        }
+
 
         translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, 0])
             dog_left_wheel();
+
+        translate([0.47 * sideScaledLength, sideScaledHeigh * 1.7, 0])
+            dog_right_wheel();
     }
     
     translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.5, 0]) 
