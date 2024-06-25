@@ -111,19 +111,19 @@ module dog_for_producing()
         rotate([0, 180, 180])
             dog_left_side();
     
-    translate([0, sideScaledHeigh * 0.95, sideWidth * 0.5])
+    translate([0, sideScaledHeigh * 1.05, sideWidth * 0.5])
         dog_right_side();
     
     if (showMedium)
     {
-        translate([sideScaledHeigh * 1.8, sideScaledHeigh * 0.3, 0])
+        translate([sideScaledHeigh * 1.9, sideScaledHeigh * 0.3, 0])
         {
             dog_medium_medium();
         
-            translate([0, sideScaledHeigh * -0.7, 0])
+            translate([0, sideScaledHeigh * -0.8, 0])
                 dog_medium_side();
             
-            translate([0, sideScaledHeigh * 0.7, 0])
+            translate([0, sideScaledHeigh * 0.8, 0])
             dog_medium_side();
         }
     }
@@ -131,7 +131,7 @@ module dog_for_producing()
     color(wheelColor, 1.0) 
     if (showWheels)
     {
-        translate([0.35 * sideScaledLength, sideScaledHeigh * 0.5, 0])
+        translate([0.4 * sideScaledLength, sideScaledHeigh * 0.5, 0])
         {
             dog_wheel_spacer(height = wheelSpacerHeight,
                             diameter = wheelSpacerDiameter,
@@ -146,14 +146,14 @@ module dog_for_producing()
         }
 
 
-        translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.7, 0])
+        translate([-0.17 * sideScaledLength, sideScaledHeigh * 1.9, 0])
             dog_left_wheel();
 
-        translate([0.47 * sideScaledLength, sideScaledHeigh * 1.7, 0])
+        translate([0.47 * sideScaledLength, sideScaledHeigh * 1.9, 0])
             dog_right_wheel();
     }
     
-    translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.5, 0]) 
+    translate([-0.3 * sideScaledLength, -sideScaledHeigh * 0.7, 0]) 
         rotate([0, 0, 90]) 
         	customization_figures();
 }
