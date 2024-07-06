@@ -16,18 +16,14 @@ showDebugFigures = false;
 
 /* [Wheels] */
 showWheels = true;
+showWheelSpacers = true;
 wheelSpacerHeight = 0.8;
 wheelSpacerDiameter = 13;
-wheelSpacerOffset = 0.6;
-
+wheelSpacerOffset = 1.0;
 wheelInternalSpacerHeight = 8;
-wheelInternalSpacerDiameter = 8;
-
-wheelClutchHeight = 6;
-wheelClutchOffset = 0.25;
-
+wheelInternalSpacerDiameter = 10;
+wheelTenonOffset = 0.5;
 wheelShaftDiameter = 4.7;
-
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
 /* [Sides] */
@@ -56,7 +52,6 @@ delta = 0.05;
 scaleFactor = expectedLength / sideRealLength;
 wheelPairWidth = (mediumTotalWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
 wheelWidth = (wheelPairWidth -  wheelInternalSpacerHeight) / 2;
-wheelInternalHalfSpacerHeight = (wheelInternalSpacerHeight + wheelClutchHeight - wheelClutchOffset) / 2;
 wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
 sideScaleFactor = isRoundingOn() ? (expectedLength - 2 * roundingRadius) / sideRealLength :  scaleFactor;//TODO generalize it across the file
 
@@ -294,10 +289,13 @@ module dog_wheels_assembled()
         {
             translate([wheelCoord[0], wheelCoord[1], sideWidth + wheelSpacerOffset])
             {
-                dog_wheel_spacer(height = wheelSpacerHeight,
-                            diameter = wheelSpacerDiameter,
-                            shaftDiameter = wheelShaftDiameter,
-                            delta = delta);
+                if (showWheelSpacers)
+                {
+                    dog_wheel_spacer(height = wheelSpacerHeight,
+                                diameter = wheelSpacerDiameter,
+                                shaftDiameter = wheelShaftDiameter,
+                                delta = delta);
+                }
 
                 translate([0, 0, wheelSpacerHeight])
                 {
@@ -386,15 +384,14 @@ module dog_wheel_internal(isRightWheel)
 {
     dog_wheel(
                 wheelWidth = wheelWidth,
-                spacerHeight = wheelInternalHalfSpacerHeight,
+                spacerHeight = wheelInternalSpacerHeight,
                 spacerDiameter = wheelInternalSpacerDiameter,
                 scaleFactor = scaleFactor,
                 shaftDiameter = wheelShaftDiameter,
                 delta = delta,
                 wheelRealDiameter = wheelRealDiameter,
                 showDebugFigures = showDebugFigures,
-                clutchHeight = wheelClutchHeight,
-                clutchOffset = wheelClutchOffset,
+                tenonOffset = wheelTenonOffset,                
                 isRightWheel = isRightWheel);
 }
 
