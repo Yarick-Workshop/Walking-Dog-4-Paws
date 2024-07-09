@@ -22,7 +22,7 @@ wheelSpacerDiameter = 13;
 wheelSpacerOffset = 1.0;
 wheelInternalSpacerHeight = 8;
 wheelInternalSpacerDiameter = 10;
-wheelTenonOffset = 0.5;
+wheelTenonOffset = 0.0;
 wheelShaftDiameter = 4.7;
 wheelColor = "White";// [Black, Blue, Brown, Chartreuse, Green, Magenta, Orange, Purple, Red, Teal, Violet, White, Yellow]
 
