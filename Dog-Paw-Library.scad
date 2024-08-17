@@ -20,23 +20,37 @@ module dog_wheel(
     delta,
     wheelRealDiameter,
     showDebugFigures,
-    clutchHeight,
-    clutchOffset,
-    isRightWheel
+    tenonOffset,
+    isRightWheel,
+    internalSpacerHeight
     )
 {
+    cubeSideWidth = sqrt( spacerDiameter * spacerDiameter / 2 );
+    
     translate([0, 0, wheelWidth * 0.5]) 
     {
-        difference()
+        if (isRightWheel)
         {
             dog_wheel_spacer(height = spacerHeight + wheelWidth * 0.5,
                             diameter = spacerDiameter,
                             shaftDiameter = shaftDiameter,
                             delta = delta
-                            );
+                            );            
+            
             rotate([0, 0, 45 * 0.5])
-                translate([spacerDiameter * 0.5, 0, (wheelWidth - clutchHeight + delta) * 0.5 + spacerHeight ])
-                    cube([spacerDiameter + clutchOffset, spacerDiameter + clutchOffset, clutchHeight + delta], center=true);
+                translate([0, 0, wheelWidth  + spacerHeight - delta])
+                difference()
+                {
+                    cube([cubeSideWidth,
+                          cubeSideWidth,
+                          wheelWidth + delta],
+                          center=true);
+                    cylinder(h= wheelWidth + 2 * delta,
+                             d = shaftDiameter,
+                             center = true,
+                             $fn=360);
+                }
+            
         }
         difference()
         {
@@ -46,7 +60,16 @@ module dog_wheel(
                         linear_extrude(height = wheelWidth, convexity=20, center = true) 
                             import(file = "dog_4_scad_wheel.svg", center=true, $fn=360);
 
-            cylinder(h = wheelWidth + delta, d = shaftDiameter, center = true, $fn = 360);        
+            cylinder(h = wheelWidth + delta, d = shaftDiameter, center = true, $fn = 360);
+            
+            if (!isRightWheel)
+            {
+                rotate([0, 0, 45 * 0.5])
+                    cube([cubeSideWidth + 2 * tenonOffset, 
+                        cubeSideWidth + 2 * tenonOffset,
+                        wheelWidth + delta],
+                        center = true);
+            }
         }
 
         if (showDebugFigures)
