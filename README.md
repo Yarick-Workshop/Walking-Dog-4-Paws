@@ -67,16 +67,16 @@ ECHO: "  Scale factor: ", 0.200348
 ECHO: 
 ECHO: "  Wheel: "
 ECHO: "      Diameter: ", 42.4739
-ECHO: "      Spacer wall thickness: ", 1.65
-ECHO: "      Width: ", 4.2
+ECHO: "      Spacer wall thickness: ", 4.15
+ECHO: "      Wheel pair width: ", 21.4
 ECHO: 
 ECHO: "  Side: "
 ECHO: "      Total length: ", 112
 ECHO: "      Total height: ", 66.0701
 ECHO: 
 ECHO: "  Others: "
-ECHO: "      Total width: ", 21
-ECHO: "      Screw rod length: ", 18.6
+ECHO: "      Total width: ", 35
+ECHO: "      Screw rod length: ", 32.6
 ```
 They are YAML-like and hierarchically grouped. So you can customize the model for your needs and see the results in the Console log.
 
@@ -98,7 +98,7 @@ Here is an example of my **printing parameters**:
 
 It is just an example. So you can play with yours 🙂. 
 
-It took me around 6.5 hours to print (in general around 8 hours) on my Graber i3 printer. Printing time depends on kind on printer and the printing parameters. 
+It took me ~10 hours to print (in general ~12 hours) on my Graber i3 printer. Printing time depends on kind on printer and the printing parameters. 
 
 
 ### Assembling
@@ -107,12 +107,11 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 
 |Name|Quantity|Comment|
 |--|--|--|
-|Drill bit ⌀ 3 mm(?)|1|In my case it was not required|
-|Drill bit ⌀ 3.2 mm|1|To drill paw shafts|
+|Drill bit ⌀ 3-3.2 mm|1|To polish the 3 mm holes|
 |Drill bit ⌀ 4.5-4.8 mm|1|To polish paw holes|
 |Drill|1|Even a primitive one because it will be used for drilling plastic parts only|
 |PTFE tube ⌀ 4 mm or a gel pen refill ⌀ ~4.3 mm|1|It will be used for the paw-wheels shaft. **PTFE tube is much better** but a pen refill can be used instead|
-|M3 x 20 screws|5||
+|M3 x 35 screws|5||
 |M3 nuts|5||
 |Screw driver|1||
 |File|1|To shorten the screws & adjust the tenons on the paws|
