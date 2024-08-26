@@ -46,7 +46,10 @@ There are several *".scad"* files in the project folder. Most of them are just l
 I used self-explanatory names for OpenSCAD model parameters. But if you still have any questions – [contact me](#contact-me).
 
 ⚠️ **Pay attention:**
-1) There are two modes: *"Preview"* and *"Producing"*. See *"General"* -> *"renderingType"* parameter. *"Preview"* allows to see the toy as if it was assembled. **If you are going to print parts** – choose *"Producing"*;
+1) There are three modes: *"Preview"*, *"Producing"* and *"Demo"* (See *"General"* -> *"renderingType"* parameter): 
+ * *"Preview"* allows to see the toy as if it was assembled;
+ * **If you are going to print parts** – choose *"Producing"*;
+ * *"Demo"* can be used to create a 3D scene as on the Logo (see above). It takes **more than 1 hour to render.**
 
 2) If you'd like to have **the rounded corners or chamfers** on the model - there are two parameters (see the *"General"* group):
     * *"rounding"*  – rounding type. **It takes too much time** to apply the effect. So, adjust any other parameters and apply either rounding or chamfer at the latest stage. And take some coffee 😉. Possible values:
