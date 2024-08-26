@@ -1,6 +1,6 @@
 /* [General] */
 expectedLength = 112;
-renderingType = "Preview";//["Preview", "Producing"]
+renderingType = "Preview";//["Preview", "Producing", "Demo"]
 rounding = "Off";//["Off", "Cone", "Sphere"]
 roundingRadius = 3.0;
 
@@ -53,14 +53,20 @@ scaleFactor = expectedLength / sideRealLength;
 wheelPairWidth = (mediumTotalWidth -  2 * (wheelSpacerHeight + wheelSpacerOffset));
 wheelWidth = (wheelPairWidth -  wheelInternalSpacerHeight) / 2;
 wheelPlaceDiameter = wheelRealDiameter * scaleFactor * 1.05;
-sideScaleFactor = isRoundingOn() ? (expectedLength - 2 * roundingRadius) / sideRealLength :  scaleFactor;//TODO generalize it across the file
+totalWidth = 2 * sideWidth + mediumTotalWidth;
 
-//TODO refactor it, too many repeating of scaleFactor
-sideMountingHoleCoords = [
-    [165 * sideScaleFactor, 35 * scaleFactor],  // "eye"
-    [-48.3 * scaleFactor, -25 * scaleFactor],   // above the paws
-    [-215 * sideScaleFactor, 80 * scaleFactor], // tail #1
-    [-230 * sideScaleFactor, 15 * scaleFactor]];// tail #2
+function GetSideScaleFactor(rounding, roundingRadius) = 
+    isRoundingOn(rounding, roundingRadius) ? 
+        (expectedLength - 2 * roundingRadius) / sideRealLength :
+        scaleFactor;//TODO generalize it across the file
+
+function GetSideMountingHoleCoords(rounding, roundingRadius) = 
+    //TODO refactor it, too many repeating of scaleFactor
+    [
+        [165 * GetSideScaleFactor(rounding, roundingRadius), 35 * scaleFactor],  // "eye"
+        [-48.3 * scaleFactor, -25 * scaleFactor],   // above the paws
+        [-215 * GetSideScaleFactor(rounding, roundingRadius), 80 * scaleFactor], // tail #1
+        [-230 * GetSideScaleFactor(rounding, roundingRadius), 15 * scaleFactor]];// tail #2
 
 wheelCoords = [[-159.7 * scaleFactor, -115.33 * scaleFactor],
     [64.25 * scaleFactor, -111.8 * scaleFactor]];
@@ -80,8 +86,8 @@ echo("      Total length: ", sideRealLength * scaleFactor);
 echo("      Total height: ", sideRealHeight * scaleFactor);
 echo();
 echo("  Others: ");
-echo("      Total width: ", 2 * sideWidth + mediumTotalWidth);
-echo("      Screw rod length: ", 2 * sideWidth + mediumTotalWidth - screwHeaderDepth);
+echo("      Total width: ", totalWidth);
+echo("      Screw rod length: ", totalWidth - screwHeaderDepth);
 echo();echo();
 
 
@@ -93,8 +99,23 @@ use <Dog-Medium-Library.scad>
 rotate([0,0,360*$t])
 if (renderingType == "Producing")
     dog_for_producing();
-else
-    dog_for_preview();
+else if (renderingType == "Preview")
+    dog_for_preview(rounding, roundingRadius);
+else if (renderingType == "Demo")
+{
+    stepY = 2.5;
+
+    stepX = 0.2;
+
+    dog_for_preview("Off", roundingRadius);
+
+    translate([expectedLength * stepX, stepY * totalWidth, 0])
+        dog_for_preview("Cone", roundingRadius);
+
+    translate([2 * expectedLength * stepX, 2 * stepY * totalWidth, 0])
+        dog_for_preview("Sphere", roundingRadius);
+}
+//TODO  add wrong type handling after "else"
 
 
 module dog_for_producing()
@@ -104,22 +125,22 @@ module dog_for_producing()
 
     translate([0, 0, sideWidth * 0.5])
         rotate([0, 180, 180])
-            dog_left_side();
+            dog_left_side(rounding, roundingRadius);
     
     translate([0, sideScaledHeigh * 1.05, sideWidth * 0.5])
-        dog_right_side();
+        dog_right_side(rounding, roundingRadius);
     
     if (showMedium)
     {
         translate([sideScaledHeigh * 1.9, sideScaledHeigh * 0.3, 0])
         {
-            dog_medium_medium();
+            dog_medium_medium(rounding, roundingRadius);
         
             translate([0, sideScaledHeigh * -0.8, 0])
-                dog_medium_side();
+                dog_medium_side(rounding, roundingRadius);
             
             translate([0, sideScaledHeigh * 0.8, 0])
-            dog_medium_side();
+            dog_medium_side(rounding, roundingRadius);
         }
     }
 
@@ -153,28 +174,28 @@ module dog_for_producing()
         	customization_figures();
 }
 
-module dog_for_preview()
+module dog_for_preview(rounding, roundingRadius)
 {
     translate([0, 0, sideRealHeight * 0.65 * scaleFactor])
 	rotate([90,0,0])
 	{
 	    translate([0, 0, sideWidth * 0.5])
-	        dog_left_side();
+	        dog_left_side(rounding, roundingRadius);
 	    
 	    translate([0, 0, sideWidth * 1.5 + mediumTotalWidth])
-	        dog_right_side();
+	        dog_right_side(rounding, roundingRadius);
 	    
         if (showMedium)
         {
             translate([0, 0, sideWidth])
             {
-                dog_medium_side();
+                dog_medium_side(rounding, roundingRadius);
 
                 translate([0, 0, mediumSideWidth]) 
-                    dog_medium_medium();
+                    dog_medium_medium(rounding, roundingRadius);
                 
                 translate([0, 0, mediumTotalWidth - mediumSideWidth]) 
-                    dog_medium_side();
+                    dog_medium_side(rounding, roundingRadius);
             }
         }
 	    
@@ -182,26 +203,26 @@ module dog_for_preview()
     }
 }
 
-function isRoundingOn() = rounding != "Off" && roundingRadius != 0;
+function isRoundingOn(_rounding, _roundingRadius) = _rounding != "Off" && roundingRadius != 0;
 
-module dog_left_side()
+module dog_left_side(rounding, roundingRadius)
 {
     if (showLeftSide)
     {
         mirror([0, 0, 1])
-            dog_side("left");
+            dog_side("left", rounding, roundingRadius);
     }
 }
 
-module dog_right_side()
+module dog_right_side(rounding, roundingRadius)
 {
     if (showRightSide)
     {
-        dog_side("right");
+        dog_side("right", rounding, roundingRadius);
     }
 }
 
-module dog_side(side)
+module dog_side(side, rounding, roundingRadius)
 {
     assert(side=="left" || side == "right", str("Side should be either \"left\" or \"right\" but not \"", side, "\"."));
     
@@ -210,10 +231,10 @@ module dog_side(side)
     color(sideColor, 1.0)
     difference()
     {
-        dog_side_internal();
+        dog_side_internal(rounding, roundingRadius);
         union()
         {
-            for(coord = sideMountingHoleCoords)
+            for(coord = GetSideMountingHoleCoords(rounding, roundingRadius))
             {
                 translate([coord[0], coord[1], 0])
                 {
@@ -237,9 +258,9 @@ module dog_side(side)
     }
 }
 
-module dog_side_internal()
+module dog_side_internal(rounding, roundingRadius)
 {
-    if (isRoundingOn())
+    if (isRoundingOn(rounding, roundingRadius))
     {
         minkowski(convexity=20) 
         {
@@ -400,17 +421,17 @@ module dog_wheel_internal(isRightWheel)
 
 // Medium helping methods: Begin
 
-module dog_medium_medium()
+module dog_medium_medium(rounding, roundingRadius)
 {
-    dog_medium_part_internal(mediumColor, mediumTotalWidth - 2 * mediumSideWidth);
+    dog_medium_part_internal(mediumColor, mediumTotalWidth - 2 * mediumSideWidth, rounding, roundingRadius);
 }
 
-module dog_medium_side()
+module dog_medium_side(rounding, roundingRadius)
 {
-    dog_medium_part_internal(mediumSideColor, mediumSideWidth);
+    dog_medium_part_internal(mediumSideColor, mediumSideWidth, rounding, roundingRadius);
 }
 
-module dog_medium_part_internal(color, width)
+module dog_medium_part_internal(color, width, rounding, roundingRadius)
 {
     color(color, 1.0)
     dog_medium(
@@ -418,10 +439,10 @@ module dog_medium_part_internal(color, width)
                 expectedLength = expectedLength,
                 sideRealLength = sideRealLength,
                 scaleFactor = scaleFactor,
-                hasRounding = isRoundingOn(),
+                hasRounding = isRoundingOn(rounding, roundingRadius),
                 roundingRadius = roundingRadius,
                 wheelPlaceDiameter = wheelPlaceDiameter,
-                sideMountingHoleCoords = sideMountingHoleCoords,
+                sideMountingHoleCoords = GetSideMountingHoleCoords(rounding, roundingRadius),
                 wheelCoords = wheelCoords,
                 delta = delta,
                 screwHoleDiameter = screwHoleDiameter);
