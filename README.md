@@ -29,9 +29,11 @@ This 3D model is highly customizable. So you can configure it for you needs.
 
 ### Pre-rendered STL
 
-If you do not need any customizations and would only like to have the same "Walking dog" toy as I have – you can download prerendered STL files from Thingiverse: 
- * https://www.thingiverse.com/thing:6499100 - angular version;
- * https://www.thingiverse.com/thing:6572654 - version with rounding or chamfer.
+If you do not need any customizations and would only like to have the same "Walking dog" toy as I have – you can download prerendered STL files: 
+ * https://t.me/YarickWorkshop/533 - version with rounding;
+ * https://t.me/YarickWorkshop/534 - with chamfers;
+ * https://t.me/YarickWorkshop/535 - angular version.
+
 
 **But do not be in hurry and read the manual there as well**. First of all print only the test figures and check if your fasteners and shafts fit well.
 
@@ -46,17 +48,13 @@ I used self-explanatory names for OpenSCAD model parameters. But if you still ha
 ⚠️ **Pay attention:**
 1) There are two modes: *"Preview"* and *"Producing"*. See *"General"* -> *"renderingType"* parameter. *"Preview"* allows to see the toy as if it was assembled. **If you are going to print parts** – choose *"Producing"*;
 
-2) To have **the wide paws** :
-    * Select the preset *"Wide Paws"* (See on the top of *"Customizer"* panel). **But in this case all your parameter changes will be reset to defaults**;
-    * Play with parameters *"wheelSpacerHeight"* and *"wheelSpacerDiameter"* from the *"Wheels"* group;
-
-3) If you'd like to have **the rounded corners or chamfers** on the model - there are two parameters (see the *"General"* group):
+2) If you'd like to have **the rounded corners or chamfers** on the model - there are two parameters (see the *"General"* group):
     * *"rounding"*  – rounding type. **It takes too much time** to apply the effect. So, adjust any other parameters and apply either rounding or chamfer at the latest stage. And take some coffee 😉. Possible values:
         |Value|Description|Correct name as for real engineers|Takes time to apply|
         |--|--|--|--|
         |*"Off"*|Neither rounding or chamfer|-|Less than a second|
-        |*"Cone"*|Conical rounding|**Chamfer**|~25 minutes|
-        |*"Sphere"*|Spherical rounding|**Rounding**|~45 minutes|
+        |*"Cone"*|Conical rounding|**Chamfer**|~30 minutes|
+        |*"Sphere"*|Spherical rounding|**Rounding**|~60 minutes|
     * *"roundingRadius"* – rounding radius / chamfer height (depending on selected value of the *"rounding"* parameter);
 
 
@@ -117,22 +115,17 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 |M3 x 20 screws|5||
 |M3 nuts|5||
 |Screw driver|1||
-|File|1|To shorten the screws|
-|Filament| ~ 65 - 70 g | With different(?) colours|
+|File|1|To shorten the screws & adjust the tenons on the paws|
+|Filament| ~ 100 g | With different(?) colours|
 |3D printer|1| Or a friend with a 3D printer 😉|
 
 
-⚠️ If you have everything from the table above **follow the next assembling video manual(-s)**: 
+⚠️ If you have everything from the table above **follow the next assembling video manual**: 
 
-|URL|Description|
-|--|--|
-|https://youtu.be/4ERVy12Y__E|**REQUIRED!** The root assembly manual. It contains the main principles / approaches  |
-|https://youtu.be/j4FVfsxbM0o|**OPTIONAL!** Watch if You prefer the wide paws as I do. 🙂|
-|https://youtu.be/0HYvyKCRPyY|**OPTIONAL!** But if you'd like to have a toy with rounding or chamfer - **REQUIRED!** |
+* https://youtu.be/OoCZ0ncWTXQ
 
 
-
-*Yeah, all the videos are in Russian but there are English subtitles too. I tried to do my best translating them to English. But if you see something could be fixed - [let me know](#contact-me) please and I will update the text. The same for text here as well. Thank you in advance!*
+*Yeah, the videos is in Russian but there are English subtitles too. I tried to do my best translating it to English. But if you see something could be fixed - [let me know](#contact-me), please! And I will update the text. The same for text here as well. Thank you in advance!*
 
 
 ## Contact me
