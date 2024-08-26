@@ -103,20 +103,17 @@ else if (renderingType == "Preview")
     dog_for_preview(rounding, roundingRadius);
 else if (renderingType == "Demo")
 {
-    stepY = 1.7;
+    stepY = 2.5;
 
     stepX = 0.2;
 
-    rotate([0, 0, 180]) 
-    {
-        dog_for_preview("Off", roundingRadius);
+    dog_for_preview("Off", roundingRadius);
 
-        translate([expectedLength * stepX, stepY * totalWidth, 0])
-            dog_for_preview("Cone", roundingRadius);
+    translate([expectedLength * stepX, stepY * totalWidth, 0])
+        dog_for_preview("Cone", roundingRadius);
 
-        translate([2 * expectedLength * stepX, 2 * stepY * totalWidth, 0])
-            dog_for_preview("Sphere", roundingRadius);
-    }
+    translate([2 * expectedLength * stepX, 2 * stepY * totalWidth, 0])
+        dog_for_preview("Sphere", roundingRadius);
 }
 //TODO  add wrong type handling after "else"
 
@@ -234,7 +231,7 @@ module dog_side(side, rounding, roundingRadius)
     color(sideColor, 1.0)
     difference()
     {
-        dog_side_internal();
+        dog_side_internal(rounding, roundingRadius);
         union()
         {
             for(coord = GetSideMountingHoleCoords(rounding, roundingRadius))
@@ -261,7 +258,7 @@ module dog_side(side, rounding, roundingRadius)
     }
 }
 
-module dog_side_internal()
+module dog_side_internal(rounding, roundingRadius)
 {
     if (isRoundingOn(rounding, roundingRadius))
     {
