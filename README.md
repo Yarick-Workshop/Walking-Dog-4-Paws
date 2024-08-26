@@ -12,7 +12,7 @@ This work is licensed under a
 
 # Walking Dog 3D Model
 <p align="center" width="100%">
-    <img width="50%" src="media/logo.png">
+    <img width="80%" src="media/logo.png">
 </p>
 
 A 3D model of a walking dog toy. The model was designed for producing on a 3D printer.
