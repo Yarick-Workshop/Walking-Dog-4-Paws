@@ -10,12 +10,12 @@ This work is licensed under a
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
-# Walking Dog 3D Model
+# 4-Paws Walking Dog 3D Model
 <p align="center" width="100%">
     <img width="80%" src="media/logo.png">
 </p>
 
-A 3D model of a walking dog toy. The model was designed for producing on a 3D printer.
+A 3D model of a 4-paws walking dog toy. The model was designed for producing on a 3D printer.
 
 ⚠️ **In case of any questions** – do not hesitate to contact the author in Telegram group ([see below](#contact-me)) and ask.
 
@@ -122,12 +122,14 @@ To assemble the walking dog you will need the next **Tools and Materials**:
 |3D printer|1| Or a friend with a 3D printer 😉|
 
 
-⚠️ If you have everything from the table above **follow the next assembling video manual**: 
+⚠️ If you have everything from the table above **follow one of the next assembling video manual links**: 
+|URL|Comment|
+|--|--|
+|https://youtu.be/OoCZ0ncWTXQ|Russian but with English subtitles|
+|https://t.me/YarickWorkshop/532|The same video on Telegram. Russian language only|
 
-* https://youtu.be/OoCZ0ncWTXQ
 
-
-*Yeah, the videos is in Russian but there are English subtitles too. I tried to do my best translating it to English. But if you see something could be fixed - [let me know](#contact-me), please! And I will update the text. The same for text here as well. Thank you in advance!*
+*I tried to do my best translating subtitles to English. But if you see something could be fixed - [let me know](#contact-me), please! And I will update the text. The same for text here as well. Thank you in advance!*
 
 
 ## Contact me
@@ -139,4 +141,4 @@ Yeah, they both are in Russian.
 
 **If you have any questions** – contact me in either Telegram channel (see above) or Mail: techno.man.983@gmail.com. I can communicate in English without any problems. 
 
-⚠️ **Pay attention**: I do not answer to any comments on YouTube (despite I read them). Why? It is a HUGE secret 🙃
+⚠️ **Pay attention**: I do not respond to any comments on YouTube (despite I read them). Why? It is a HUGE secret 🙃
