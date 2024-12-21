@@ -32,7 +32,8 @@ This 3D model is highly customizable. So you can configure it for you needs.
 If you do not need any customizations and would only like to have the same "Walking dog" toy as I have – you can download prerendered STL files: 
  * https://t.me/YarickWorkshop/533 - version with rounding;
  * https://t.me/YarickWorkshop/534 - with chamfers;
- * https://t.me/YarickWorkshop/535 - angular version.
+ * https://t.me/YarickWorkshop/535 - angular version;
+ * https://www.thingiverse.com/thing:6853423 - all 3 versions(angular, with chamfers and with rounding).
 
 
 **But do not be in hurry and read the manual there as well**. First of all print only the test figures and check if your fasteners and shafts fit well.
